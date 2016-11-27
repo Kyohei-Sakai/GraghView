@@ -1,0 +1,537 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		7FDD1D741DEB2A3D0049F235 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDD1D731DEB2A3D0049F235 /* AppDelegate.swift */; };
+		7FDD1D761DEB2A3D0049F235 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDD1D751DEB2A3D0049F235 /* ViewController.swift */; };
+		7FDD1D791DEB2A3D0049F235 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FDD1D771DEB2A3D0049F235 /* Main.storyboard */; };
+		7FDD1D7B1DEB2A3D0049F235 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FDD1D7A1DEB2A3D0049F235 /* Assets.xcassets */; };
+		7FDD1D7E1DEB2A3D0049F235 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FDD1D7C1DEB2A3D0049F235 /* LaunchScreen.storyboard */; };
+		7FDD1D891DEB2A3D0049F235 /* GraghViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDD1D881DEB2A3D0049F235 /* GraghViewTests.swift */; };
+		7FDD1D941DEB2A3D0049F235 /* GraghViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDD1D931DEB2A3D0049F235 /* GraghViewUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7FDD1D851DEB2A3D0049F235 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7FDD1D681DEB2A3D0049F235 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7FDD1D6F1DEB2A3D0049F235;
+			remoteInfo = GraghView;
+		};
+		7FDD1D901DEB2A3D0049F235 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7FDD1D681DEB2A3D0049F235 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7FDD1D6F1DEB2A3D0049F235;
+			remoteInfo = GraghView;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		7FDD1D701DEB2A3D0049F235 /* GraghView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GraghView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FDD1D731DEB2A3D0049F235 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7FDD1D751DEB2A3D0049F235 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7FDD1D781DEB2A3D0049F235 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7FDD1D7A1DEB2A3D0049F235 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7FDD1D7D1DEB2A3D0049F235 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7FDD1D7F1DEB2A3D0049F235 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7FDD1D841DEB2A3D0049F235 /* GraghViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GraghViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FDD1D881DEB2A3D0049F235 /* GraghViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraghViewTests.swift; sourceTree = "<group>"; };
+		7FDD1D8A1DEB2A3D0049F235 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7FDD1D8F1DEB2A3D0049F235 /* GraghViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GraghViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FDD1D931DEB2A3D0049F235 /* GraghViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraghViewUITests.swift; sourceTree = "<group>"; };
+		7FDD1D951DEB2A3D0049F235 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7FDD1D6D1DEB2A3D0049F235 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7FDD1D811DEB2A3D0049F235 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7FDD1D8C1DEB2A3D0049F235 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7FDD1D671DEB2A3D0049F235 = {
+			isa = PBXGroup;
+			children = (
+				7FDD1D721DEB2A3D0049F235 /* GraghView */,
+				7FDD1D871DEB2A3D0049F235 /* GraghViewTests */,
+				7FDD1D921DEB2A3D0049F235 /* GraghViewUITests */,
+				7FDD1D711DEB2A3D0049F235 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7FDD1D711DEB2A3D0049F235 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7FDD1D701DEB2A3D0049F235 /* GraghView.app */,
+				7FDD1D841DEB2A3D0049F235 /* GraghViewTests.xctest */,
+				7FDD1D8F1DEB2A3D0049F235 /* GraghViewUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7FDD1D721DEB2A3D0049F235 /* GraghView */ = {
+			isa = PBXGroup;
+			children = (
+				7FDD1D731DEB2A3D0049F235 /* AppDelegate.swift */,
+				7FDD1D751DEB2A3D0049F235 /* ViewController.swift */,
+				7FDD1D771DEB2A3D0049F235 /* Main.storyboard */,
+				7FDD1D7A1DEB2A3D0049F235 /* Assets.xcassets */,
+				7FDD1D7C1DEB2A3D0049F235 /* LaunchScreen.storyboard */,
+				7FDD1D7F1DEB2A3D0049F235 /* Info.plist */,
+			);
+			path = GraghView;
+			sourceTree = "<group>";
+		};
+		7FDD1D871DEB2A3D0049F235 /* GraghViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				7FDD1D881DEB2A3D0049F235 /* GraghViewTests.swift */,
+				7FDD1D8A1DEB2A3D0049F235 /* Info.plist */,
+			);
+			path = GraghViewTests;
+			sourceTree = "<group>";
+		};
+		7FDD1D921DEB2A3D0049F235 /* GraghViewUITests */ = {
+			isa = PBXGroup;
+			children = (
+				7FDD1D931DEB2A3D0049F235 /* GraghViewUITests.swift */,
+				7FDD1D951DEB2A3D0049F235 /* Info.plist */,
+			);
+			path = GraghViewUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7FDD1D6F1DEB2A3D0049F235 /* GraghView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7FDD1D981DEB2A3D0049F235 /* Build configuration list for PBXNativeTarget "GraghView" */;
+			buildPhases = (
+				7FDD1D6C1DEB2A3D0049F235 /* Sources */,
+				7FDD1D6D1DEB2A3D0049F235 /* Frameworks */,
+				7FDD1D6E1DEB2A3D0049F235 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GraghView;
+			productName = GraghView;
+			productReference = 7FDD1D701DEB2A3D0049F235 /* GraghView.app */;
+			productType = "com.apple.product-type.application";
+		};
+		7FDD1D831DEB2A3D0049F235 /* GraghViewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7FDD1D9B1DEB2A3D0049F235 /* Build configuration list for PBXNativeTarget "GraghViewTests" */;
+			buildPhases = (
+				7FDD1D801DEB2A3D0049F235 /* Sources */,
+				7FDD1D811DEB2A3D0049F235 /* Frameworks */,
+				7FDD1D821DEB2A3D0049F235 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7FDD1D861DEB2A3D0049F235 /* PBXTargetDependency */,
+			);
+			name = GraghViewTests;
+			productName = GraghViewTests;
+			productReference = 7FDD1D841DEB2A3D0049F235 /* GraghViewTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		7FDD1D8E1DEB2A3D0049F235 /* GraghViewUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7FDD1D9E1DEB2A3D0049F235 /* Build configuration list for PBXNativeTarget "GraghViewUITests" */;
+			buildPhases = (
+				7FDD1D8B1DEB2A3D0049F235 /* Sources */,
+				7FDD1D8C1DEB2A3D0049F235 /* Frameworks */,
+				7FDD1D8D1DEB2A3D0049F235 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7FDD1D911DEB2A3D0049F235 /* PBXTargetDependency */,
+			);
+			name = GraghViewUITests;
+			productName = GraghViewUITests;
+			productReference = 7FDD1D8F1DEB2A3D0049F235 /* GraghViewUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7FDD1D681DEB2A3D0049F235 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0810;
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = "酒井恭平";
+				TargetAttributes = {
+					7FDD1D6F1DEB2A3D0049F235 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = L92T6S2ZF8;
+						ProvisioningStyle = Automatic;
+					};
+					7FDD1D831DEB2A3D0049F235 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = L92T6S2ZF8;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 7FDD1D6F1DEB2A3D0049F235;
+					};
+					7FDD1D8E1DEB2A3D0049F235 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = L92T6S2ZF8;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 7FDD1D6F1DEB2A3D0049F235;
+					};
+				};
+			};
+			buildConfigurationList = 7FDD1D6B1DEB2A3D0049F235 /* Build configuration list for PBXProject "GraghView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7FDD1D671DEB2A3D0049F235;
+			productRefGroup = 7FDD1D711DEB2A3D0049F235 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7FDD1D6F1DEB2A3D0049F235 /* GraghView */,
+				7FDD1D831DEB2A3D0049F235 /* GraghViewTests */,
+				7FDD1D8E1DEB2A3D0049F235 /* GraghViewUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7FDD1D6E1DEB2A3D0049F235 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7FDD1D7E1DEB2A3D0049F235 /* LaunchScreen.storyboard in Resources */,
+				7FDD1D7B1DEB2A3D0049F235 /* Assets.xcassets in Resources */,
+				7FDD1D791DEB2A3D0049F235 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7FDD1D821DEB2A3D0049F235 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7FDD1D8D1DEB2A3D0049F235 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7FDD1D6C1DEB2A3D0049F235 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7FDD1D761DEB2A3D0049F235 /* ViewController.swift in Sources */,
+				7FDD1D741DEB2A3D0049F235 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7FDD1D801DEB2A3D0049F235 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7FDD1D891DEB2A3D0049F235 /* GraghViewTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7FDD1D8B1DEB2A3D0049F235 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7FDD1D941DEB2A3D0049F235 /* GraghViewUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7FDD1D861DEB2A3D0049F235 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7FDD1D6F1DEB2A3D0049F235 /* GraghView */;
+			targetProxy = 7FDD1D851DEB2A3D0049F235 /* PBXContainerItemProxy */;
+		};
+		7FDD1D911DEB2A3D0049F235 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7FDD1D6F1DEB2A3D0049F235 /* GraghView */;
+			targetProxy = 7FDD1D901DEB2A3D0049F235 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		7FDD1D771DEB2A3D0049F235 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7FDD1D781DEB2A3D0049F235 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		7FDD1D7C1DEB2A3D0049F235 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7FDD1D7D1DEB2A3D0049F235 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		7FDD1D961DEB2A3D0049F235 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7FDD1D971DEB2A3D0049F235 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7FDD1D991DEB2A3D0049F235 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = L92T6S2ZF8;
+				INFOPLIST_FILE = GraghView/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = kyohei.GraghView;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		7FDD1D9A1DEB2A3D0049F235 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = L92T6S2ZF8;
+				INFOPLIST_FILE = GraghView/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = kyohei.GraghView;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		7FDD1D9C1DEB2A3D0049F235 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = L92T6S2ZF8;
+				INFOPLIST_FILE = GraghViewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = kyohei.GraghViewTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GraghView.app/GraghView";
+			};
+			name = Debug;
+		};
+		7FDD1D9D1DEB2A3D0049F235 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = L92T6S2ZF8;
+				INFOPLIST_FILE = GraghViewTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = kyohei.GraghViewTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GraghView.app/GraghView";
+			};
+			name = Release;
+		};
+		7FDD1D9F1DEB2A3D0049F235 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = L92T6S2ZF8;
+				INFOPLIST_FILE = GraghViewUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = kyohei.GraghViewUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = GraghView;
+			};
+			name = Debug;
+		};
+		7FDD1DA01DEB2A3D0049F235 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = L92T6S2ZF8;
+				INFOPLIST_FILE = GraghViewUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = kyohei.GraghViewUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = GraghView;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7FDD1D6B1DEB2A3D0049F235 /* Build configuration list for PBXProject "GraghView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7FDD1D961DEB2A3D0049F235 /* Debug */,
+				7FDD1D971DEB2A3D0049F235 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7FDD1D981DEB2A3D0049F235 /* Build configuration list for PBXNativeTarget "GraghView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7FDD1D991DEB2A3D0049F235 /* Debug */,
+				7FDD1D9A1DEB2A3D0049F235 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7FDD1D9B1DEB2A3D0049F235 /* Build configuration list for PBXNativeTarget "GraghViewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7FDD1D9C1DEB2A3D0049F235 /* Debug */,
+				7FDD1D9D1DEB2A3D0049F235 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		7FDD1D9E1DEB2A3D0049F235 /* Build configuration list for PBXNativeTarget "GraghViewUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7FDD1D9F1DEB2A3D0049F235 /* Debug */,
+				7FDD1DA01DEB2A3D0049F235 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7FDD1D681DEB2A3D0049F235 /* Project object */;
+}
