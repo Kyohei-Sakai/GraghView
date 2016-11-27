@@ -14,6 +14,8 @@
 		7FDD1D7E1DEB2A3D0049F235 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FDD1D7C1DEB2A3D0049F235 /* LaunchScreen.storyboard */; };
 		7FDD1D891DEB2A3D0049F235 /* GraghViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDD1D881DEB2A3D0049F235 /* GraghViewTests.swift */; };
 		7FDD1D941DEB2A3D0049F235 /* GraghViewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDD1D931DEB2A3D0049F235 /* GraghViewUITests.swift */; };
+		7FDD1DA21DEB2A880049F235 /* GraghView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDD1DA11DEB2A880049F235 /* GraghView.swift */; };
+		7FDD1DA41DEB2AA20049F235 /* GraghViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDD1DA31DEB2AA20049F235 /* GraghViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		7FDD1D8F1DEB2A3D0049F235 /* GraghViewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GraghViewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FDD1D931DEB2A3D0049F235 /* GraghViewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraghViewUITests.swift; sourceTree = "<group>"; };
 		7FDD1D951DEB2A3D0049F235 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7FDD1DA11DEB2A880049F235 /* GraghView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraghView.swift; sourceTree = "<group>"; };
+		7FDD1DA31DEB2AA20049F235 /* GraghViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraghViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +103,8 @@
 			children = (
 				7FDD1D731DEB2A3D0049F235 /* AppDelegate.swift */,
 				7FDD1D751DEB2A3D0049F235 /* ViewController.swift */,
+				7FDD1DA11DEB2A880049F235 /* GraghView.swift */,
+				7FDD1DA31DEB2AA20049F235 /* GraghViewCell.swift */,
 				7FDD1D771DEB2A3D0049F235 /* Main.storyboard */,
 				7FDD1D7A1DEB2A3D0049F235 /* Assets.xcassets */,
 				7FDD1D7C1DEB2A3D0049F235 /* LaunchScreen.storyboard */,
@@ -263,6 +269,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FDD1D761DEB2A3D0049F235 /* ViewController.swift in Sources */,
+				7FDD1DA21DEB2A880049F235 /* GraghView.swift in Sources */,
+				7FDD1DA41DEB2AA20049F235 /* GraghViewCell.swift in Sources */,
 				7FDD1D741DEB2A3D0049F235 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

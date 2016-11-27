@@ -1,0 +1,192 @@
+//
+//  GraghViewCell.swift
+//  GraghView
+//
+//  Created by 酒井恭平 on 2016/11/27.
+//  Copyright © 2016年 酒井恭平. All rights reserved.
+//
+
+import UIKit
+
+// MARK: - GraghViewCell Class
+
+class GraghViewCell: UIView {
+    // MARK: - Pablic properties
+    
+    var comparisonValueY: CGFloat? {
+        guard let comparisonValueHeight = comparisonValueHeight else { return nil }
+        return y - comparisonValueHeight
+    }
+    
+    // MARK: - Private properties
+    
+    // MARK: Shared
+    
+    // default is bar
+    private var style: GraghStyle?
+    
+    private var graghView: GraghView?
+    
+    private var graghValue: CGFloat
+    private var maxGraghValue: CGFloat? { return graghView?.maxGraghValue }
+    
+    private var date: Date?
+    private var comparisonValue: CGFloat?
+    
+    private var maxBarAreaHeight: CGFloat? {
+        guard let maxGraghValue = maxGraghValue else { return nil }
+        return maxGraghValue / LayoutProportion.maxGraghValueRate
+    }
+    
+    private var barAreaHeight: CGFloat { return frame.height * LayoutProportion.barAreaHeightRate }
+    
+    private var barHeigth: CGFloat? {
+        guard let maxBarAreaHeight = maxBarAreaHeight else { return nil }
+        return barAreaHeight * graghValue / maxBarAreaHeight
+    }
+    
+    // barの終点のY座標・roundのposition
+    private var toY: CGFloat? {
+        guard let barHeigth = barHeigth else { return nil }
+        return y - barHeigth
+    }
+    
+    private var labelHeight: CGFloat { return (frame.height - barAreaHeight) / 2 }
+    
+    private var comparisonValueHeight: CGFloat? {
+        guard let maxBarAreaHeight = maxBarAreaHeight, let comparisonValue = comparisonValue else { return nil }
+        return barAreaHeight * comparisonValue / maxBarAreaHeight
+    }
+    
+    // MARK: Only Bar
+    
+    private var barWidth: CGFloat { return frame.width * LayoutProportion.barWidthRate }
+    
+    // barの始点のX座標（＝終点のX座標）
+    private var x: CGFloat { return frame.width / 2 }
+    // barの始点のY座標（上下に文字列表示用の余白がある）
+    private var y: CGFloat { return barAreaHeight + (frame.height - barAreaHeight) / 2 }
+    
+    // MARK: - Initializers
+    
+    init(frame: CGRect, graghValue: CGFloat, date: Date, comparisonValue: CGFloat, target graghView: GraghView? = nil) {
+        self.graghView = graghView
+        self.style = graghView?.graghStyle
+        self.graghValue = graghValue
+        self.date = date
+        self.comparisonValue = comparisonValue
+        super.init(frame: frame)
+        self.backgroundColor = LayoutProportion.GraghBackgroundColor
+    }
+    
+    // storyboardで生成する時
+    required init?(coder aDecoder: NSCoder) {
+        self.graghValue = 0
+        super.init(coder: aDecoder)
+        //        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    // MARK: - Override
+    
+    override func draw(_ rect: CGRect) {
+        guard let style = style else {
+            return
+        }
+        
+        if let toY = toY {
+            // Graghを描画
+            switch style {
+            case .bar: drawBar(from: CGPoint(x: x, y: y), to: CGPoint(x: x, y: toY))
+            case .round: drawRound(point: CGPoint(x: x, y: toY))
+            }
+        }
+        
+        // 上部に支出額を表示
+        drawLabel(centerX: x, centerY: labelHeight / 2, width: rect.width, height: labelHeight, text: String("¥ \(graghValue)"))
+        
+        // StringをDateに変換するためのFormatterを用意
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM"
+        
+        if let date = date {
+            // 下部に月を表示
+            drawLabel(centerX: x, centerY: rect.height - labelHeight / 2, width: rect.width, height: labelHeight, text: dateFormatter.string(from: date))
+        }
+        
+    }
+    
+    
+    // MARK: - Private methods
+    
+    // MARK: Drawing
+    
+    private func drawBar(from startPoint: CGPoint, to endPoint: CGPoint) {
+        let BarPath = UIBezierPath()
+        BarPath.move(to: startPoint)
+        BarPath.addLine(to: endPoint)
+        BarPath.lineWidth = barWidth
+        LayoutProportion.barColor.setStroke()
+        BarPath.stroke()
+    }
+    
+    private func drawRound(point: CGPoint) {
+        let origin = CGPoint(x: point.x - LayoutProportion.roundSize / 2, y: point.y - LayoutProportion.roundSize / 2)
+        let size = CGSize(width: LayoutProportion.roundSize, height: LayoutProportion.roundSize)
+        let round = UIBezierPath(ovalIn: CGRect(origin: origin, size: size))
+        LayoutProportion.roundColor.setFill()
+        round.fill()
+        
+    }
+    
+    private func drawLabel(centerX x: CGFloat, centerY y: CGFloat, width: CGFloat, height: CGFloat, text: String) {
+        let label: UILabel = UILabel()
+        label.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        label.center = CGPoint(x: x, y: y)
+        label.text = text
+        label.textAlignment = .center
+        label.font = label.font.withSize(10)
+        label.backgroundColor = LayoutProportion.labelBackgroundColor
+        addSubview(label)
+    }
+    
+    
+    // MARK: - Struct
+    
+    // Barのレイアウトを決定するためのデータ
+    struct LayoutProportion {
+        // MARK: Shared
+        
+        // barAreaHeight / frame.height
+        static var barAreaHeightRate: CGFloat = 0.8
+        // maxGraghValueRate / maxBarAreaHeight
+        static var maxGraghValueRate: CGFloat = 0.8
+        
+        // MARK: Only Bar
+        
+        // bar.width / rect.width
+        static var barWidthRate: CGFloat = 0.5
+        // Bar Color
+        static var barColor = UIColor.blue.withAlphaComponent(0.8)
+        // Label backgroundColor
+        static var labelBackgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
+        // Gragh backgroundColor
+        static var GraghBackgroundColor = UIColor.orange.withAlphaComponent(0.5)
+        
+        // MARK: Only Round
+        
+        // round size
+        static var roundSize: CGFloat = 10
+        // round color
+        static var roundColor = UIColor.red.withAlphaComponent(0.8)
+    }
+    
+    /*
+    // Only override draw() if you perform custom drawing.
+    // An empty implementation adversely affects performance during animation.
+    override func draw(_ rect: CGRect) {
+        // Drawing code
+    }
+    */
+
+}
