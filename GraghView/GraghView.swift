@@ -31,6 +31,7 @@ class GraghView: UIScrollView {
     
     // データの中の最大値 -> これをもとにBar表示領域の高さを決める
     var maxGraghValue: CGFloat? { return graghValues.max() }
+    private let roundPathView = UIView()
     
     // MARK: Setting ComparisonValue
     private let comparisonValueLabel = UILabel()
@@ -39,6 +40,8 @@ class GraghView: UIScrollView {
     private var comparisonValueY: CGFloat?
     
     // MARK: - Public properties
+    
+    var graghViewCells: [GraghViewCell] = []
     
     // データ配列
     var graghValues: [CGFloat] = []
@@ -160,6 +163,33 @@ class GraghView: UIScrollView {
         }
     }
     
+    // draw path to round
+    func drawPathToRound() {
+//        if graghStyle != .round { return }
+        
+        guard let firstCell = graghViewCells.first, let startPoint = firstCell.endPoint else { return }
+        
+        // GraghViewと同じ大きさのViewを用意
+        roundPathView.frame = CGRect(origin: .zero, size: contentSize)
+        roundPathView.backgroundColor = UIColor.clear
+        UIGraphicsBeginImageContextWithOptions(contentSize, false, 0)
+        // Lineを描画
+        let path = UIBezierPath()
+        path.move(to: startPoint)
+        for index in 1..<graghViewCells.count {
+            if let endPoint = graghViewCells[index].endPoint {
+                path.addLine(to: CGPoint(x: endPoint.x + CGFloat(index) * GraghLayoutData.barAreaWidth, y: endPoint.y))
+            }
+        }
+        path.lineWidth = GraghLayoutData.lineWidth
+        layout.roundColor.setStroke()
+        path.stroke()
+        roundPathView.layer.contents = UIGraphicsGetImageFromCurrentImageContext()?.cgImage
+        UIGraphicsEndImageContext()
+        // GraghViewに重ねる
+        addSubview(roundPathView)
+    }
+    
     
     // MARK: - Public methods
     
@@ -184,7 +214,9 @@ class GraghView: UIScrollView {
             }
         }
         
+        drawPathToRound()
         drawComparisonValue()
+        
     }
     
     func reloadGraghView() {

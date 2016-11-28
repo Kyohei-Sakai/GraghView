@@ -13,6 +13,11 @@ import UIKit
 class GraghViewCell: UIView {
     // MARK: - Pablic properties
     
+    var endPoint: CGPoint? {
+        guard let toY = toY else { return nil }
+        return CGPoint(x: x, y: toY)
+    }
+    
     var comparisonValueY: CGFloat? {
         guard let comparisonValueHeight = comparisonValueHeight, let y = y else { return nil }
         return y - comparisonValueHeight
@@ -95,6 +100,7 @@ class GraghViewCell: UIView {
         
         super.init(frame: frame)
         self.backgroundColor = layout?.GraghBackgroundColor
+        self.graghView?.graghViewCells.append(self)
     }
     
     // storyboardで生成する時
@@ -113,11 +119,11 @@ class GraghViewCell: UIView {
             return
         }
         
-        if let toY = toY {
+        if let y = y, let endPoint = endPoint {
             // Graghを描画
             switch style {
-            case .bar: drawBar(from: CGPoint(x: x, y: y), to: CGPoint(x: x, y: toY))
-            case .round: drawRound(point: CGPoint(x: x, y: toY))
+            case .bar: drawBar(from: CGPoint(x: x, y: y), to: endPoint)
+            case .round: drawRound(point: endPoint)
             }
         }
         
