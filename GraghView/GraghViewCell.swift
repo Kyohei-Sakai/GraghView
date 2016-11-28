@@ -25,6 +25,7 @@ class GraghViewCell: UIView {
     private var graghView: GraghView?
     private var style: GraghStyle?
     private var dateStyle: GraghViewDateStyle?
+    private var dataType: GraghViewDataType?
     
     private var graghValue: CGFloat
     private var maxGraghValue: CGFloat? { return graghView?.maxGraghValue }
@@ -72,9 +73,12 @@ class GraghViewCell: UIView {
         self.graghView = graghView
         self.style = graghView?.graghStyle
         self.dateStyle = graghView?.dateStyle
+        self.dataType = graghView?.dataType
+        
         self.graghValue = graghValue
         self.date = date
         self.comparisonValue = comparisonValue
+        
         super.init(frame: frame)
         self.backgroundColor = LayoutProportion.GraghBackgroundColor
     }
@@ -102,11 +106,11 @@ class GraghViewCell: UIView {
             }
         }
         
-        // 上部に支出額を表示
-        drawLabel(centerX: x, centerY: labelHeight / 2, width: rect.width, height: labelHeight, text: String("¥ \(graghValue)"))
+        // over labelを表示
+        drawLabel(centerX: x, centerY: labelHeight / 2, width: rect.width, height: labelHeight, text: overTextFormatter(from: graghValue))
         
         if let date = date {
-            // 下部に月を表示
+            // under labelを表示
             drawLabel(centerX: x, centerY: rect.height - labelHeight / 2, width: rect.width, height: labelHeight, text: underTextFormatter(from: date))
         }
         
@@ -130,6 +134,18 @@ class GraghViewCell: UIView {
         }
         
         return dateFormatter.string(from: date)
+    }
+    
+    // MARK: Over Label's text format
+    private func overTextFormatter(from value: CGFloat) -> String {
+        guard let dataType = dataType else {
+            return ""
+        }
+        
+        switch dataType {
+        case .normal: return String("\(value)")
+        case .yen: return String("\(Int(value)) 円")
+        }
         
     }
     

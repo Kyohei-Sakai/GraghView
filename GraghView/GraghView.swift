@@ -18,6 +18,10 @@ enum GraghViewDateStyle: Int {
     case year, month, day
 }
 
+enum GraghViewDataType: Int {
+    case normal, yen
+}
+
 
 // MARK: - GraghView Class
 
@@ -43,8 +47,11 @@ class GraghView: UIScrollView {
     
     var graghStyle: GraghStyle = .bar
     
-    // labelに表示するDate間隔
+    // under labelに表示するDate間隔
     var dateStyle: GraghViewDateStyle = .month
+    
+    // over labelに表示する値の属性
+    var dataType: GraghViewDataType = .normal
     
     // MARK: Setting ComparisonValue
     
@@ -112,7 +119,7 @@ class GraghView: UIScrollView {
         
         drawComparisonValueLine(from: CGPoint(x: comparisonValueX, y: comparisonValueY), to: CGPoint(x: contentSize.width, y: comparisonValueY))
         
-        drawComparisonValueLabel(frame: CGRect(x: comparisonValueX, y: comparisonValueY, width: 50, height: 20), text: String(describing: comparisonValue))
+        drawComparisonValueLabel(frame: CGRect(x: comparisonValueX, y: comparisonValueY, width: 50, height: 20), text: overTextFormatter(from: comparisonValue))
     }
     
     private func drawComparisonValueLine(from statPoint: CGPoint, to endPoint: CGPoint) {
@@ -141,6 +148,14 @@ class GraghView: UIScrollView {
         comparisonValueLabel.font = comparisonValueLabel.font.withSize(10)
         comparisonValueLabel.backgroundColor = GraghLayoutData.labelBackgroundColor
         addSubview(comparisonValueLabel)
+    }
+    
+    // over Label's text format
+    private func overTextFormatter(from value: CGFloat) -> String {
+        switch dataType {
+        case .normal: return String(describing: value)
+        case .yen: return String("\(Int(value)) 円")
+        }
     }
     
     

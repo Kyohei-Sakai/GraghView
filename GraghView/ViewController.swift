@@ -81,6 +81,7 @@ class ViewController: UIViewController {
         // optional setting
         thirdGraghView.graghStyle = .bar
         thirdGraghView.dateStyle = .day
+        thirdGraghView.dataType = .yen
         
         thirdGraghView.setBarWidth(rate: 0.95)
         thirdGraghView.setBarAreaHeight(rate: 0.8)
