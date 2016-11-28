@@ -29,8 +29,6 @@ class GraghView: UIScrollView {
     
     // MARK: - Private properties
     
-    // データの中の最大値 -> これをもとにBar表示領域の高さを決める
-    var maxGraghValue: CGFloat? { return graghValues.max() }
     private let roundPathView = UIView()
     
     // MARK: Setting ComparisonValue
@@ -58,9 +56,12 @@ class GraghView: UIScrollView {
     
     var layout = LayoutProportion()
     
+    // データの中の最大値 -> これをもとにBar表示領域の高さを決める
+    var maxGraghValue: CGFloat? { return graghValues.max() }
+    
     // MARK: Setting ComparisonValue
     
-    @IBInspectable var comparisonValue: CGFloat = 100000
+    @IBInspectable var comparisonValue: CGFloat = 0
     
     @IBInspectable var comparisonValueIsHidden: Bool = false {
         didSet {
@@ -70,7 +71,7 @@ class GraghView: UIScrollView {
     }
     
     // Delegate
-    //    var barDelegate: BarGraghViewDelegate?
+//    var barDelegate: BarGraghViewDelegate?
     
     
     // MARK: - Initializers
@@ -118,9 +119,7 @@ class GraghView: UIScrollView {
     // MARK: Drawing
     
     private func drawComparisonValue() {
-        guard let comparisonValueY = comparisonValueY else {
-            return
-        }
+        guard let comparisonValueY = comparisonValueY else { return }
         
         drawComparisonValueLine(from: CGPoint(x: comparisonValueX, y: comparisonValueY), to: CGPoint(x: contentSize.width, y: comparisonValueY))
         
@@ -196,8 +195,6 @@ class GraghView: UIScrollView {
     func loadGraghView() {
         let calendar = Calendar(identifier: .gregorian)
         contentSize.height = frame.height
-        
-        
         
         for index in 0..<graghValues.count {
             contentSize.width += GraghLayoutData.barAreaWidth

@@ -108,7 +108,7 @@ class GraghViewCell: UIView {
         self.graghValue = 0
         self.layout = nil
         super.init(coder: aDecoder)
-        //        fatalError("init(coder:) has not been implemented")
+//        fatalError("init(coder:) has not been implemented")
     }
     
     
@@ -127,12 +127,15 @@ class GraghViewCell: UIView {
             }
         }
         
-        // over labelを表示
-        drawLabel(centerX: x, centerY: labelHeight / 2, width: rect.width, height: labelHeight, text: overTextFormatter(from: graghValue))
-        
-        if let date = date {
-            // under labelを表示
-            drawLabel(centerX: x, centerY: rect.height - labelHeight / 2, width: rect.width, height: labelHeight, text: underTextFormatter(from: date))
+        if let labelHeight = labelHeight {
+            // over labelを表示
+            drawLabel(centerX: x, centerY: labelHeight / 2, width: rect.width, height: labelHeight, text: overTextFormatter(from: graghValue))
+            
+            if let date = date {
+                // under labelを表示
+                drawLabel(centerX: x, centerY: rect.height - labelHeight / 2, width: rect.width, height: labelHeight, text: underTextFormatter(from: date))
+            }
+            
         }
         
     }
