@@ -243,13 +243,42 @@ class GraghView: UIScrollView {
     
     // MARK: - Struct
     
+    // MARK: - Struct
+    
+    // Graghのレイアウトを決定するためのデータ
+    struct LayoutProportion {
+        // MARK: Shared
+        
+        // barAreaHeight / frame.height
+        var barAreaHeightRate: CGFloat = 0.8
+        // maxGraghValueRate / maxBarAreaHeight
+        var maxGraghValueRate: CGFloat = 0.8
+        
+        // MARK: Only Bar
+        
+        // bar.width / rect.width
+        var barWidthRate: CGFloat = 0.5
+        // Bar Color
+        var barColor = UIColor.init(red: 1.0, green: 0.7, blue: 0.7, alpha: 1.0)
+        // Label backgroundColor
+        var labelBackgroundColor = UIColor.init(white: 0.95, alpha: 1.0)
+        // Gragh backgroundColor
+        var GraghBackgroundColor = UIColor.init(white: 0.9, alpha: 1.0)
+        
+        // MARK: Only Round
+        
+        // round size
+        var roundSize: CGFloat = 10
+        // round color
+        var roundColor = UIColor.init(red: 0.7, green: 0.7, blue: 1.0, alpha: 1.0)
+    }
+    
     private struct GraghLayoutData {
         // 生成するBar領域の幅
         static var barAreaWidth: CGFloat = 50
         static var labelBackgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
         static var lineColor = UIColor.red
         static var lineWidth: CGFloat = 2
-        
     }
     
 }

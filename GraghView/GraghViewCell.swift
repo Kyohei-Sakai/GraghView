@@ -181,35 +181,7 @@ class GraghViewCell: UIView {
     }
     
     
-    // MARK: - Struct
     
-    // Barのレイアウトを決定するためのデータ
-    struct LayoutProportion {
-        // MARK: Shared
-        
-        // barAreaHeight / frame.height
-        static var barAreaHeightRate: CGFloat = 0.8
-        // maxGraghValueRate / maxBarAreaHeight
-        static var maxGraghValueRate: CGFloat = 0.8
-        
-        // MARK: Only Bar
-        
-        // bar.width / rect.width
-        static var barWidthRate: CGFloat = 0.5
-        // Bar Color
-        static var barColor = UIColor.init(red: 1.0, green: 0.7, blue: 0.7, alpha: 1.0)
-        // Label backgroundColor
-        static var labelBackgroundColor = UIColor.init(white: 0.95, alpha: 1.0)
-        // Gragh backgroundColor
-        static var GraghBackgroundColor = UIColor.init(white: 0.9, alpha: 1.0)
-        
-        // MARK: Only Round
-        
-        // round size
-        static var roundSize: CGFloat = 10
-        // round color
-        static var roundColor = UIColor.init(red: 0.7, green: 0.7, blue: 1.0, alpha: 1.0)
-    }
     
     /*
     // Only override draw() if you perform custom drawing.
