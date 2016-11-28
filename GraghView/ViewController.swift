@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         
         // optional setting
         secondGraghView.graghStyle = .round
-        secondGraghView.dateStyle = .year
+        secondGraghView.dateStyle = .day
         
         secondGraghView.setBarWidth(rate: 0.5)
         secondGraghView.setBarAreaHeight(rate: 0.6)

@@ -22,10 +22,9 @@ class GraghViewCell: UIView {
     
     // MARK: Shared
     
-    // default is bar
-    private var style: GraghStyle?
-    
     private var graghView: GraghView?
+    private var style: GraghStyle?
+    private var dateStyle: GraghViewDateStyle?
     
     private var graghValue: CGFloat
     private var maxGraghValue: CGFloat? { return graghView?.maxGraghValue }
@@ -72,6 +71,7 @@ class GraghViewCell: UIView {
     init(frame: CGRect, graghValue: CGFloat, date: Date, comparisonValue: CGFloat, target graghView: GraghView? = nil) {
         self.graghView = graghView
         self.style = graghView?.graghStyle
+        self.dateStyle = graghView?.dateStyle
         self.graghValue = graghValue
         self.date = date
         self.comparisonValue = comparisonValue
@@ -105,19 +105,33 @@ class GraghViewCell: UIView {
         // 上部に支出額を表示
         drawLabel(centerX: x, centerY: labelHeight / 2, width: rect.width, height: labelHeight, text: String("¥ \(graghValue)"))
         
-        // StringをDateに変換するためのFormatterを用意
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy/MM"
-        
         if let date = date {
             // 下部に月を表示
-            drawLabel(centerX: x, centerY: rect.height - labelHeight / 2, width: rect.width, height: labelHeight, text: dateFormatter.string(from: date))
+            drawLabel(centerX: x, centerY: rect.height - labelHeight / 2, width: rect.width, height: labelHeight, text: underTextFormatter(from: date))
         }
         
     }
     
     
     // MARK: - Private methods
+    
+    // MARK: Under Label's text format
+    private func underTextFormatter(from date: Date) -> String {
+        guard let dateStyle = dateStyle else {
+            return ""
+        }
+        
+        let dateFormatter = DateFormatter()
+        
+        switch dateStyle {
+        case .year: dateFormatter.dateFormat = "yyyy"
+        case .month: dateFormatter.dateFormat = "yyyy/MM"
+        case .day: dateFormatter.dateFormat = "MM/dd"
+        }
+        
+        return dateFormatter.string(from: date)
+        
+    }
     
     // MARK: Drawing
     
