@@ -12,6 +12,8 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var firstGraghView: GraghView!
     @IBOutlet weak var secondGraghView: GraghView!
+    @IBOutlet weak var thirdGraghView: GraghView!
+    
     
     let graghData: [CGFloat] = [30, 50, 19, 22, 46, 10, 1, 66, 35, 49]
     var minimumDate: Date { return Date() }
@@ -25,6 +27,9 @@ class ViewController: UIViewController {
         
         setSecondGraghOption()
         secondGraghView.loadGraghView()
+        
+        setThirdGraghOption()
+        thirdGraghView.loadGraghView()
         
     }
     
@@ -55,16 +60,36 @@ class ViewController: UIViewController {
         
         // optional setting
         secondGraghView.graghStyle = .round
-        secondGraghView.dateStyle = .day
+        secondGraghView.dateStyle = .month
         
         secondGraghView.setBarWidth(rate: 0.5)
         secondGraghView.setBarAreaHeight(rate: 0.6)
         secondGraghView.setMaxGraghValue(rate: 0.8)
-        secondGraghView.setBarArea(width: 60)
+        secondGraghView.setBarArea(width: 80)
         
         secondGraghView.comparisonValue = 35
         secondGraghView.setComparisonValueLine(color: UIColor.init(red: 1.0, green: 0.2, blue: 0.2, alpha: 1.0))
         secondGraghView.setComparisonValueLabel(backgroundColor: UIColor.init(red: 0.2, green: 0.3, blue: 0.7, alpha: 0.9))
+        
+    }
+    
+    private func setThirdGraghOption() {
+        // most setting
+        thirdGraghView.graghValues = graghData
+        thirdGraghView.minimumDate = minimumDate
+        
+        // optional setting
+        thirdGraghView.graghStyle = .bar
+        thirdGraghView.dateStyle = .day
+        
+        thirdGraghView.setBarWidth(rate: 0.95)
+        thirdGraghView.setBarAreaHeight(rate: 0.8)
+        thirdGraghView.setMaxGraghValue(rate: 1.0)
+        thirdGraghView.setBarArea(width: 50)
+        
+        thirdGraghView.comparisonValue = 10
+        thirdGraghView.setComparisonValueLine(color: UIColor.init(red: 0.1, green: 0.1, blue: 0.15, alpha: 1.0))
+        thirdGraghView.setComparisonValueLabel(backgroundColor: UIColor.init(red: 0.2, green: 0.8, blue: 0.4, alpha: 0.9))
         
     }
 

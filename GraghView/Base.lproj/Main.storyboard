@@ -22,11 +22,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nrz-7X-FHi" customClass="GraghView" customModule="GraghView" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="52" width="375" height="237"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="220"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </scrollView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YP4-bA-dMo" customClass="GraghView" customModule="GraghView" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="297" width="375" height="237"/>
+                                <rect key="frame" x="0.0" y="248" width="375" height="176"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </scrollView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k42-o2-p65" customClass="GraghView" customModule="GraghView" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="432" width="375" height="176"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </scrollView>
                         </subviews>
@@ -35,6 +39,7 @@
                     <connections>
                         <outlet property="firstGraghView" destination="nrz-7X-FHi" id="LsN-3T-lgk"/>
                         <outlet property="secondGraghView" destination="YP4-bA-dMo" id="nl8-1Q-l4I"/>
+                        <outlet property="thirdGraghView" destination="k42-o2-p65" id="eSa-Ja-fAb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
