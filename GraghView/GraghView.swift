@@ -53,6 +53,8 @@ class GraghView: UIScrollView {
     // over labelに表示する値の属性
     var dataType: GraghViewDataType = .normal
     
+    var layout = LayoutProportion()
+    
     // MARK: Setting ComparisonValue
     
     @IBInspectable var comparisonValue: CGFloat = 100000
@@ -209,35 +211,35 @@ class GraghView: UIScrollView {
     
     // BarのLayoutProportionはGraghViewから変更する
     func setBarAreaHeight(rate: CGFloat) {
-        GraghViewCell.LayoutProportion.barAreaHeightRate = rate
+        layout.barAreaHeightRate = rate
     }
     
     func setMaxGraghValue(rate: CGFloat) {
-        GraghViewCell.LayoutProportion.maxGraghValueRate = rate
+        layout.maxGraghValueRate = rate
     }
     
     func setBarWidth(rate: CGFloat) {
-        GraghViewCell.LayoutProportion.barWidthRate = rate
+        layout.barWidthRate = rate
     }
     
     func setBar(color: UIColor) {
-        GraghViewCell.LayoutProportion.barColor = color
+        layout.barColor = color
     }
     
     func setLabel(backgroundcolor: UIColor) {
-        GraghViewCell.LayoutProportion.labelBackgroundColor = backgroundcolor
+        layout.labelBackgroundColor = backgroundcolor
     }
     
     func setGragh(backgroundcolor: UIColor) {
-        GraghViewCell.LayoutProportion.GraghBackgroundColor = backgroundcolor
+        layout.GraghBackgroundColor = backgroundcolor
     }
     
     func setRound(size: CGFloat) {
-        GraghViewCell.LayoutProportion.roundSize = size
+        layout.roundSize = size
     }
     
     func setRound(color: UIColor) {
-        GraghViewCell.LayoutProportion.roundColor = color
+        layout.roundColor = color
     }
     
     

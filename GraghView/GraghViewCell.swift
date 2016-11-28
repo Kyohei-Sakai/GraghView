@@ -14,7 +14,7 @@ class GraghViewCell: UIView {
     // MARK: - Pablic properties
     
     var comparisonValueY: CGFloat? {
-        guard let comparisonValueHeight = comparisonValueHeight else { return nil }
+        guard let comparisonValueHeight = comparisonValueHeight, let y = y else { return nil }
         return y - comparisonValueHeight
     }
     
@@ -27,6 +27,8 @@ class GraghViewCell: UIView {
     private var dateStyle: GraghViewDateStyle?
     private var dataType: GraghViewDataType?
     
+    private let layout: GraghView.LayoutProportion?
+    
     private var graghValue: CGFloat
     private var maxGraghValue: CGFloat? { return graghView?.maxGraghValue }
     
@@ -34,38 +36,49 @@ class GraghViewCell: UIView {
     private var comparisonValue: CGFloat?
     
     private var maxBarAreaHeight: CGFloat? {
-        guard let maxGraghValue = maxGraghValue else { return nil }
-        return maxGraghValue / LayoutProportion.maxGraghValueRate
+        guard let maxGraghValue = maxGraghValue, let layout = layout else { return nil }
+        return maxGraghValue / layout.maxGraghValueRate
     }
     
-    private var barAreaHeight: CGFloat { return frame.height * LayoutProportion.barAreaHeightRate }
+    private var barAreaHeight: CGFloat? {
+        guard let layout = layout else { return nil }
+        return frame.height * layout.barAreaHeightRate
+    }
     
     private var barHeigth: CGFloat? {
-        guard let maxBarAreaHeight = maxBarAreaHeight else { return nil }
+        guard let maxBarAreaHeight = maxBarAreaHeight, let barAreaHeight = barAreaHeight else { return nil }
         return barAreaHeight * graghValue / maxBarAreaHeight
     }
     
     // barの終点のY座標・roundのposition
     private var toY: CGFloat? {
-        guard let barHeigth = barHeigth else { return nil }
+        guard let barHeigth = barHeigth, let y = y else { return nil }
         return y - barHeigth
     }
     
-    private var labelHeight: CGFloat { return (frame.height - barAreaHeight) / 2 }
+    private var labelHeight: CGFloat? {
+        guard let barAreaHeight = barAreaHeight else { return nil }
+        return (frame.height - barAreaHeight) / 2 }
     
     private var comparisonValueHeight: CGFloat? {
-        guard let maxBarAreaHeight = maxBarAreaHeight, let comparisonValue = comparisonValue else { return nil }
+        guard let maxBarAreaHeight = maxBarAreaHeight, let comparisonValue = comparisonValue, let barAreaHeight = barAreaHeight else { return nil }
         return barAreaHeight * comparisonValue / maxBarAreaHeight
     }
     
     // MARK: Only Bar
     
-    private var barWidth: CGFloat { return frame.width * LayoutProportion.barWidthRate }
+    private var barWidth: CGFloat? {
+        guard let layout = layout else { return nil }
+        return frame.width * layout.barWidthRate
+    }
     
     // barの始点のX座標（＝終点のX座標）
     private var x: CGFloat { return frame.width / 2 }
     // barの始点のY座標（上下に文字列表示用の余白がある）
-    private var y: CGFloat { return barAreaHeight + (frame.height - barAreaHeight) / 2 }
+    private var y: CGFloat? {
+        guard let barAreaHeight = barAreaHeight else { return nil }
+        return barAreaHeight + (frame.height - barAreaHeight) / 2
+    }
     
     // MARK: - Initializers
     
@@ -74,18 +87,20 @@ class GraghViewCell: UIView {
         self.style = graghView?.graghStyle
         self.dateStyle = graghView?.dateStyle
         self.dataType = graghView?.dataType
+        self.layout = graghView?.layout
         
         self.graghValue = graghValue
         self.date = date
         self.comparisonValue = comparisonValue
         
         super.init(frame: frame)
-        self.backgroundColor = LayoutProportion.GraghBackgroundColor
+        self.backgroundColor = layout?.GraghBackgroundColor
     }
     
     // storyboardで生成する時
     required init?(coder aDecoder: NSCoder) {
         self.graghValue = 0
+        self.layout = nil
         super.init(coder: aDecoder)
         //        fatalError("init(coder:) has not been implemented")
     }
@@ -155,18 +170,19 @@ class GraghViewCell: UIView {
         let BarPath = UIBezierPath()
         BarPath.move(to: startPoint)
         BarPath.addLine(to: endPoint)
-        BarPath.lineWidth = barWidth
-        LayoutProportion.barColor.setStroke()
+        BarPath.lineWidth = barWidth ?? 0
+        layout?.barColor.setStroke()
         BarPath.stroke()
     }
     
     private func drawRound(point: CGPoint) {
-        let origin = CGPoint(x: point.x - LayoutProportion.roundSize / 2, y: point.y - LayoutProportion.roundSize / 2)
-        let size = CGSize(width: LayoutProportion.roundSize, height: LayoutProportion.roundSize)
-        let round = UIBezierPath(ovalIn: CGRect(origin: origin, size: size))
-        LayoutProportion.roundColor.setFill()
-        round.fill()
+        guard let layout = layout else { return }
         
+        let origin = CGPoint(x: point.x - layout.roundSize / 2, y: point.y - layout.roundSize / 2)
+        let size = CGSize(width: layout.roundSize, height: layout.roundSize)
+        let round = UIBezierPath(ovalIn: CGRect(origin: origin, size: size))
+        layout.roundColor.setFill()
+        round.fill()
     }
     
     private func drawLabel(centerX x: CGFloat, centerY y: CGFloat, width: CGFloat, height: CGFloat, text: String) {
@@ -176,7 +192,7 @@ class GraghViewCell: UIView {
         label.text = text
         label.textAlignment = .center
         label.font = label.font.withSize(10)
-        label.backgroundColor = LayoutProportion.labelBackgroundColor
+        label.backgroundColor = layout?.labelBackgroundColor
         addSubview(label)
     }
     
