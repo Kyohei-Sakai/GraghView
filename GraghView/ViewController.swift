@@ -66,7 +66,7 @@ class ViewController: UIViewController {
         secondGraghView.setBarAreaHeight(rate: 0.6)
         secondGraghView.setMaxGraghValue(rate: 0.8)
         secondGraghView.setCellArea(width: 80)
-        secondGraghView.setRoundIsHiden(bool: true)
+//        secondGraghView.setRoundIsHidden(bool: true)
         
         secondGraghView.comparisonValue = 35
         secondGraghView.setComparisonValueLine(color: UIColor.init(red: 1.0, green: 0.2, blue: 0.2, alpha: 1.0))
@@ -85,9 +85,10 @@ class ViewController: UIViewController {
         thirdGraghView.dataType = .yen
         
         thirdGraghView.setBarWidth(rate: 0.95)
-        thirdGraghView.setBarAreaHeight(rate: 0.8)
+        thirdGraghView.setBarAreaHeight(rate: 0.9)
         thirdGraghView.setMaxGraghValue(rate: 1.0)
         thirdGraghView.setCellArea(width: 50)
+//        thirdGraghView.setValueLabelIsHidden(bool: true)
         
         thirdGraghView.comparisonValue = 10
         thirdGraghView.setComparisonValueLine(color: UIColor.init(red: 0.1, green: 0.1, blue: 0.15, alpha: 1.0))

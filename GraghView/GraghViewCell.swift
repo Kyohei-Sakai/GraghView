@@ -62,8 +62,14 @@ class GraghViewCell: UIView {
     }
     
     private var labelHeight: CGFloat? {
-        guard let barAreaHeight = barAreaHeight else { return nil }
-        return (frame.height - barAreaHeight) / 2 }
+        guard let barAreaHeight = barAreaHeight, let isHidden = cellLayout?.valueLabelIsHidden else { return nil }
+        
+        if isHidden {
+            return frame.height - barAreaHeight
+        } else {
+            return (frame.height - barAreaHeight) / 2
+        }
+    }
     
     private var comparisonValueHeight: CGFloat? {
         guard let maxBarAreaHeight = maxBarAreaHeight, let comparisonValue = comparisonValue, let barAreaHeight = barAreaHeight else { return nil }
@@ -79,10 +85,16 @@ class GraghViewCell: UIView {
     
     // barの始点のX座標（＝終点のX座標）
     private var x: CGFloat { return frame.width / 2 }
-    // barの始点のY座標（上下に文字列表示用の余白がある）
+    // barの始点のY座標
     private var y: CGFloat? {
-        guard let barAreaHeight = barAreaHeight else { return nil }
-        return barAreaHeight + (frame.height - barAreaHeight) / 2
+        guard let barAreaHeight = barAreaHeight, let labelHeight = labelHeight, let isHidden = cellLayout?.valueLabelIsHidden else { return nil }
+        
+        if isHidden {
+            return barAreaHeight
+        } else {
+            return barAreaHeight + labelHeight / 2
+        }
+        
     }
     
     // MARK: Only Round
@@ -128,22 +140,12 @@ class GraghViewCell: UIView {
             // Graghを描画
             switch style {
             case .bar: drawBar(from: CGPoint(x: x, y: y), to: endPoint)
-            case .round:
-                if let cellLayout = cellLayout, !cellLayout.onlyPathLine {
-                    drawRound(point: endPoint)}
+            case .round: drawRound(point: endPoint)
             }
         }
         
-        if let labelHeight = labelHeight {
-            // over labelを表示
-            drawLabel(centerX: x, centerY: labelHeight / 2, width: rect.width, height: labelHeight, text: overTextFormatter(from: graghValue))
-            
-            if let date = date {
-                // under labelを表示
-                drawLabel(centerX: x, centerY: rect.height - labelHeight / 2, width: rect.width, height: labelHeight, text: underTextFormatter(from: date))
-            }
-            
-        }
+        drawOverLabel()
+        drawUnderLabel()
         
     }
     
@@ -192,7 +194,7 @@ class GraghViewCell: UIView {
     }
     
     private func drawRound(point: CGPoint) {
-        guard let cellLayout = cellLayout, let roundSize = roundSize else { return }
+        guard let cellLayout = cellLayout, let roundSize = roundSize, !cellLayout.onlyPathLine else { return }
         
         let origin = CGPoint(x: point.x - roundSize / 2, y: point.y - roundSize / 2)
         let size = CGSize(width: roundSize, height: roundSize)
@@ -201,26 +203,37 @@ class GraghViewCell: UIView {
         round.fill()
     }
     
-    private func drawLabel(centerX x: CGFloat, centerY y: CGFloat, width: CGFloat, height: CGFloat, text: String) {
-        let label: UILabel = UILabel()
-        label.frame = CGRect(x: 0, y: 0, width: width, height: height)
-        label.center = CGPoint(x: x, y: y)
-        label.text = text
-        label.textAlignment = .center
-        label.font = label.font.withSize(10)
-        label.backgroundColor = cellLayout?.labelBackgroundColor
-        addSubview(label)
+    private func drawOverLabel() {
+        guard let cellLayout = cellLayout, let labelHeight = labelHeight else { return }
+        
+        let overLabel: UILabel = UILabel()
+        overLabel.frame = CGRect(x: 0, y: 0, width: frame.width, height: labelHeight)
+        overLabel.center = CGPoint(x: x, y: labelHeight / 2)
+        overLabel.text = overTextFormatter(from: graghValue)
+        overLabel.textAlignment = .center
+        overLabel.font = overLabel.font.withSize(10)
+        overLabel.backgroundColor = cellLayout.labelBackgroundColor
+        overLabel.isHidden = cellLayout.valueLabelIsHidden
+        addSubview(overLabel)
     }
     
-    
-    
-    
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    private func drawUnderLabel() {
+        guard let labelHeight = labelHeight, let date = date else { return }
+        
+        let underLabel: UILabel = UILabel()
+        underLabel.frame = CGRect(x: 0, y: 0, width: frame.width, height: labelHeight)
+        underLabel.center = CGPoint(x: x, y: frame.height - labelHeight / 2)
+        underLabel.text = underTextFormatter(from: date)
+        underLabel.textAlignment = .center
+        underLabel.font = underLabel.font.withSize(10)
+        underLabel.backgroundColor = cellLayout?.labelBackgroundColor
+        addSubview(underLabel)
     }
-    */
-
+    
 }
+
+
+
+
+
+

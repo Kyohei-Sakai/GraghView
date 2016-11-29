@@ -276,8 +276,12 @@ class GraghView: UIScrollView {
         cellLayout.roundColor = color
     }
     
-    func setRoundIsHiden(bool: Bool) {
+    func setRoundIsHidden(bool: Bool) {
         cellLayout.onlyPathLine = bool
+    }
+    
+    func setValueLabelIsHidden(bool: Bool) {
+        cellLayout.valueLabelIsHidden = bool
     }
     
     
@@ -291,9 +295,10 @@ class GraghView: UIScrollView {
         var barAreaHeightRate: CGFloat = 0.8
         // maxGraghValueRate / maxBarAreaHeight
         var maxGraghValueRate: CGFloat = 0.8
-        
-        // 生成するBar領域の幅
+        // cell width
         var cellAreaWidth: CGFloat = 50
+        // if over label is hidden
+        var valueLabelIsHidden: Bool = false
         
         // MARK: Only Bar
         
@@ -312,7 +317,7 @@ class GraghView: UIScrollView {
         var roundSizeRate: CGFloat = 0.1
         // round color
         var roundColor = UIColor.init(red: 0.7, green: 0.7, blue: 1.0, alpha: 1.0)
-        // if round is hiden
+        // if round is hidden
         var onlyPathLine: Bool = false
         
     }
