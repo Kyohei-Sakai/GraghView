@@ -46,18 +46,20 @@ class GraghView: UIScrollView {
     // グラフのラベルに表示する情報
     var minimumDate: Date?
     
+    // garghの種類
     var graghStyle: GraghStyle = .bar
-    
     // under labelに表示するDate間隔
     var dateStyle: GraghViewDateStyle = .month
-    
     // over labelに表示する値の属性
     var dataType: GraghViewDataType = .normal
     
-    var layout = LayoutProportion()
+    // layoutに関するデータのまとまり
+    var cellLayout = GraghViewCellLayoutOptions()
+    var graghLayout = GraghLayoutOptions()
     
     // データの中の最大値 -> これをもとにBar表示領域の高さを決める
     var maxGraghValue: CGFloat? { return graghValues.max() }
+    
     
     // MARK: Setting ComparisonValue
     
@@ -118,6 +120,8 @@ class GraghView: UIScrollView {
     
     // MARK: Drawing
     
+    // MARK: Comparison Value
+    
     private func drawComparisonValue() {
         guard let comparisonValueY = comparisonValueY else { return }
         
@@ -136,8 +140,8 @@ class GraghView: UIScrollView {
         linePath.lineCapStyle = .round
         linePath.move(to: statPoint)
         linePath.addLine(to: endPoint)
-        linePath.lineWidth = GraghLayoutData.lineWidth
-        GraghLayoutData.lineColor.setStroke()
+        linePath.lineWidth = graghLayout.comparisonLineWidth
+        graghLayout.comparisonLineColor.setStroke()
         linePath.stroke()
         comparisonValueLineView.layer.contents = UIGraphicsGetImageFromCurrentImageContext()?.cgImage
         UIGraphicsEndImageContext()
@@ -150,7 +154,7 @@ class GraghView: UIScrollView {
         comparisonValueLabel.text = text
         comparisonValueLabel.textAlignment = .center
         comparisonValueLabel.font = comparisonValueLabel.font.withSize(10)
-        comparisonValueLabel.backgroundColor = GraghLayoutData.labelBackgroundColor
+        comparisonValueLabel.backgroundColor = graghLayout.comparisonLabelBackgroundColor
         addSubview(comparisonValueLabel)
     }
     
@@ -162,9 +166,10 @@ class GraghView: UIScrollView {
         }
     }
     
-    // draw path to round
+    // MARK: Round Path
+    
     func drawPathToRound() {
-//        if graghStyle != .round { return }
+        if graghStyle != .round { return }
         
         guard let firstCell = graghViewCells.first, let startPoint = firstCell.endPoint else { return }
         
@@ -177,11 +182,11 @@ class GraghView: UIScrollView {
         path.move(to: startPoint)
         for index in 1..<graghViewCells.count {
             if let endPoint = graghViewCells[index].endPoint {
-                path.addLine(to: CGPoint(x: endPoint.x + CGFloat(index) * GraghLayoutData.barAreaWidth, y: endPoint.y))
+                path.addLine(to: CGPoint(x: endPoint.x + CGFloat(index) * cellLayout.cellAreaWidth, y: endPoint.y))
             }
         }
-        path.lineWidth = GraghLayoutData.lineWidth
-        layout.roundColor.setStroke()
+        path.lineWidth = graghLayout.roundPathWidth
+        cellLayout.roundColor.setStroke()
         path.stroke()
         roundPathView.layer.contents = UIGraphicsGetImageFromCurrentImageContext()?.cgImage
         UIGraphicsEndImageContext()
@@ -197,11 +202,11 @@ class GraghView: UIScrollView {
         contentSize.height = frame.height
         
         for index in 0..<graghValues.count {
-            contentSize.width += GraghLayoutData.barAreaWidth
+            contentSize.width += cellLayout.cellAreaWidth
             
             if let minimumDate = minimumDate, let date = calendar.date(byAdding: dateToMinimumDate(addComponentValue: index), to: minimumDate) {
                 // barの表示をずらしていく
-                let rect = CGRect(origin: CGPoint(x: CGFloat(index) * GraghLayoutData.barAreaWidth, y: 0), size: CGSize(width: GraghLayoutData.barAreaWidth, height: frame.height))
+                let rect = CGRect(origin: CGPoint(x: CGFloat(index) * cellLayout.cellAreaWidth, y: 0), size: CGSize(width: cellLayout.cellAreaWidth, height: frame.height))
                 
                 let cell = GraghViewCell(frame: rect, graghValue: graghValues[index], date: date, comparisonValue: comparisonValue, target: self)
                 
@@ -226,64 +231,65 @@ class GraghView: UIScrollView {
     
     // MARK: Set Gragh Customize
     
-    func setBarArea(width: CGFloat) {
-        GraghLayoutData.barAreaWidth = width
-    }
-    
     func setComparisonValueLabel(backgroundColor: UIColor) {
-        GraghLayoutData.labelBackgroundColor = backgroundColor
+        graghLayout.comparisonLabelBackgroundColor = backgroundColor
     }
     
     func setComparisonValueLine(color: UIColor) {
-        GraghLayoutData.lineColor = color
+        graghLayout.comparisonLineColor = color
     }
     
     // BarのLayoutProportionはGraghViewから変更する
+    func setBarArea(width: CGFloat) {
+        cellLayout.cellAreaWidth = width
+    }
+    
     func setBarAreaHeight(rate: CGFloat) {
-        layout.barAreaHeightRate = rate
+        cellLayout.barAreaHeightRate = rate
     }
     
     func setMaxGraghValue(rate: CGFloat) {
-        layout.maxGraghValueRate = rate
+        cellLayout.maxGraghValueRate = rate
     }
     
     func setBarWidth(rate: CGFloat) {
-        layout.barWidthRate = rate
+        cellLayout.barWidthRate = rate
     }
     
     func setBar(color: UIColor) {
-        layout.barColor = color
+        cellLayout.barColor = color
     }
     
     func setLabel(backgroundcolor: UIColor) {
-        layout.labelBackgroundColor = backgroundcolor
+        cellLayout.labelBackgroundColor = backgroundcolor
     }
     
     func setGragh(backgroundcolor: UIColor) {
-        layout.GraghBackgroundColor = backgroundcolor
+        cellLayout.GraghBackgroundColor = backgroundcolor
     }
     
     func setRound(size: CGFloat) {
-        layout.roundSize = size
+        cellLayout.roundSize = size
     }
     
     func setRound(color: UIColor) {
-        layout.roundColor = color
+        cellLayout.roundColor = color
     }
     
     
     // MARK: - Struct
     
-    // MARK: - Struct
-    
-    // Graghのレイアウトを決定するためのデータ
-    struct LayoutProportion {
+    // GraghViewCellのレイアウトを決定するためのデータ
+    struct GraghViewCellLayoutOptions {
         // MARK: Shared
         
         // barAreaHeight / frame.height
         var barAreaHeightRate: CGFloat = 0.8
         // maxGraghValueRate / maxBarAreaHeight
         var maxGraghValueRate: CGFloat = 0.8
+        
+        // 生成するBar領域の幅
+        var cellAreaWidth: CGFloat = 50
         
         // MARK: Only Bar
         
@@ -304,12 +310,18 @@ class GraghView: UIScrollView {
         var roundColor = UIColor.init(red: 0.7, green: 0.7, blue: 1.0, alpha: 1.0)
     }
     
-    private struct GraghLayoutData {
-        // 生成するBar領域の幅
-        static var barAreaWidth: CGFloat = 50
-        static var labelBackgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
-        static var lineColor = UIColor.red
-        static var lineWidth: CGFloat = 2
+    // GraghViewCellsに孵化するViewsのレイアウトを決定するためのデータ
+    struct GraghLayoutOptions {
+        // MARK: Comparison Value
+        
+        var comparisonLabelBackgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
+        var comparisonLineColor = UIColor.red
+        var comparisonLineWidth: CGFloat = 1
+        
+        // MARK: Round Path
+        
+        var roundPathWidth: CGFloat = 2
+        
     }
     
 }

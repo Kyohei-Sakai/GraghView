@@ -32,7 +32,7 @@ class GraghViewCell: UIView {
     private var dateStyle: GraghViewDateStyle?
     private var dataType: GraghViewDataType?
     
-    private let layout: GraghView.LayoutProportion?
+    private let cellLayout: GraghView.GraghViewCellLayoutOptions?
     
     private var graghValue: CGFloat
     private var maxGraghValue: CGFloat? { return graghView?.maxGraghValue }
@@ -41,13 +41,13 @@ class GraghViewCell: UIView {
     private var comparisonValue: CGFloat?
     
     private var maxBarAreaHeight: CGFloat? {
-        guard let maxGraghValue = maxGraghValue, let layout = layout else { return nil }
-        return maxGraghValue / layout.maxGraghValueRate
+        guard let maxGraghValue = maxGraghValue, let cellLayout = cellLayout else { return nil }
+        return maxGraghValue / cellLayout.maxGraghValueRate
     }
     
     private var barAreaHeight: CGFloat? {
-        guard let layout = layout else { return nil }
-        return frame.height * layout.barAreaHeightRate
+        guard let cellLayout = cellLayout else { return nil }
+        return frame.height * cellLayout.barAreaHeightRate
     }
     
     private var barHeigth: CGFloat? {
@@ -73,8 +73,8 @@ class GraghViewCell: UIView {
     // MARK: Only Bar
     
     private var barWidth: CGFloat? {
-        guard let layout = layout else { return nil }
-        return frame.width * layout.barWidthRate
+        guard let cellLayout = cellLayout else { return nil }
+        return frame.width * cellLayout.barWidthRate
     }
     
     // barの始点のX座標（＝終点のX座標）
@@ -92,21 +92,21 @@ class GraghViewCell: UIView {
         self.style = graghView?.graghStyle
         self.dateStyle = graghView?.dateStyle
         self.dataType = graghView?.dataType
-        self.layout = graghView?.layout
+        self.cellLayout = graghView?.cellLayout
         
         self.graghValue = graghValue
         self.date = date
         self.comparisonValue = comparisonValue
         
         super.init(frame: frame)
-        self.backgroundColor = layout?.GraghBackgroundColor
+        self.backgroundColor = cellLayout?.GraghBackgroundColor
         self.graghView?.graghViewCells.append(self)
     }
     
     // storyboardで生成する時
     required init?(coder aDecoder: NSCoder) {
         self.graghValue = 0
-        self.layout = nil
+        self.cellLayout = nil
         super.init(coder: aDecoder)
 //        fatalError("init(coder:) has not been implemented")
     }
@@ -180,17 +180,17 @@ class GraghViewCell: UIView {
         BarPath.move(to: startPoint)
         BarPath.addLine(to: endPoint)
         BarPath.lineWidth = barWidth ?? 0
-        layout?.barColor.setStroke()
+        cellLayout?.barColor.setStroke()
         BarPath.stroke()
     }
     
     private func drawRound(point: CGPoint) {
-        guard let layout = layout else { return }
+        guard let cellLayout = cellLayout else { return }
         
-        let origin = CGPoint(x: point.x - layout.roundSize / 2, y: point.y - layout.roundSize / 2)
-        let size = CGSize(width: layout.roundSize, height: layout.roundSize)
+        let origin = CGPoint(x: point.x - cellLayout.roundSize / 2, y: point.y - cellLayout.roundSize / 2)
+        let size = CGSize(width: cellLayout.roundSize, height: cellLayout.roundSize)
         let round = UIBezierPath(ovalIn: CGRect(origin: origin, size: size))
-        layout.roundColor.setFill()
+        cellLayout.roundColor.setFill()
         round.fill()
     }
     
@@ -201,7 +201,7 @@ class GraghViewCell: UIView {
         label.text = text
         label.textAlignment = .center
         label.font = label.font.withSize(10)
-        label.backgroundColor = layout?.labelBackgroundColor
+        label.backgroundColor = cellLayout?.labelBackgroundColor
         addSubview(label)
     }
     
