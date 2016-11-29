@@ -240,7 +240,7 @@ class GraghView: UIScrollView {
     }
     
     // BarのLayoutProportionはGraghViewから変更する
-    func setBarArea(width: CGFloat) {
+    func setCellArea(width: CGFloat) {
         cellLayout.cellAreaWidth = width
     }
     
@@ -268,8 +268,8 @@ class GraghView: UIScrollView {
         cellLayout.GraghBackgroundColor = backgroundcolor
     }
     
-    func setRound(size: CGFloat) {
-        cellLayout.roundSize = size
+    func setRoundSize(rate: CGFloat) {
+        cellLayout.roundSizeRate = rate
     }
     
     func setRound(color: UIColor) {
@@ -283,7 +283,7 @@ class GraghView: UIScrollView {
     struct GraghViewCellLayoutOptions {
         // MARK: Shared
         
-        // barAreaHeight / frame.height
+        // cellAreaHeight / frame.height
         var barAreaHeightRate: CGFloat = 0.8
         // maxGraghValueRate / maxBarAreaHeight
         var maxGraghValueRate: CGFloat = 0.8
@@ -304,8 +304,8 @@ class GraghView: UIScrollView {
         
         // MARK: Only Round
         
-        // round size
-        var roundSize: CGFloat = 10
+        // round size / cellAreaWidth
+        var roundSizeRate: CGFloat = 0.1
         // round color
         var roundColor = UIColor.init(red: 0.7, green: 0.7, blue: 1.0, alpha: 1.0)
     }

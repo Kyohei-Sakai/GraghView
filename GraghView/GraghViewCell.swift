@@ -85,6 +85,13 @@ class GraghViewCell: UIView {
         return barAreaHeight + (frame.height - barAreaHeight) / 2
     }
     
+    // MARK: Only Round
+    
+    private var roundSize: CGFloat? {
+        guard let roundSizeRate = cellLayout?.roundSizeRate else { return nil }
+        return roundSizeRate * frame.width
+    }
+    
     // MARK: - Initializers
     
     init(frame: CGRect, graghValue: CGFloat, date: Date, comparisonValue: CGFloat, target graghView: GraghView? = nil) {
@@ -185,10 +192,10 @@ class GraghViewCell: UIView {
     }
     
     private func drawRound(point: CGPoint) {
-        guard let cellLayout = cellLayout else { return }
+        guard let cellLayout = cellLayout, let roundSize = roundSize else { return }
         
-        let origin = CGPoint(x: point.x - cellLayout.roundSize / 2, y: point.y - cellLayout.roundSize / 2)
-        let size = CGSize(width: cellLayout.roundSize, height: cellLayout.roundSize)
+        let origin = CGPoint(x: point.x - roundSize / 2, y: point.y - roundSize / 2)
+        let size = CGSize(width: roundSize, height: roundSize)
         let round = UIBezierPath(ovalIn: CGRect(origin: origin, size: size))
         cellLayout.roundColor.setFill()
         round.fill()

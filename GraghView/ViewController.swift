@@ -45,7 +45,7 @@ class ViewController: UIViewController {
         firstGraghView.setBarWidth(rate: 0.9)
         firstGraghView.setBarAreaHeight(rate: 0.9)
         firstGraghView.setMaxGraghValue(rate: 0.6)
-        firstGraghView.setBarArea(width: 100)
+        firstGraghView.setCellArea(width: 100)
         
         firstGraghView.comparisonValue = 50
         firstGraghView.setComparisonValueLine(color: .green)
@@ -62,10 +62,10 @@ class ViewController: UIViewController {
         secondGraghView.graghStyle = .round
         secondGraghView.dateStyle = .month
         
-        secondGraghView.setBarWidth(rate: 0.5)
+        secondGraghView.setRoundSize(rate: 0.1)
         secondGraghView.setBarAreaHeight(rate: 0.6)
         secondGraghView.setMaxGraghValue(rate: 0.8)
-        secondGraghView.setBarArea(width: 80)
+        secondGraghView.setCellArea(width: 80)
         
         secondGraghView.comparisonValue = 35
         secondGraghView.setComparisonValueLine(color: UIColor.init(red: 1.0, green: 0.2, blue: 0.2, alpha: 1.0))
@@ -86,7 +86,7 @@ class ViewController: UIViewController {
         thirdGraghView.setBarWidth(rate: 0.95)
         thirdGraghView.setBarAreaHeight(rate: 0.8)
         thirdGraghView.setMaxGraghValue(rate: 1.0)
-        thirdGraghView.setBarArea(width: 50)
+        thirdGraghView.setCellArea(width: 50)
         
         thirdGraghView.comparisonValue = 10
         thirdGraghView.setComparisonValueLine(color: UIColor.init(red: 0.1, green: 0.1, blue: 0.15, alpha: 1.0))
