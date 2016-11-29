@@ -66,6 +66,7 @@ class ViewController: UIViewController {
         secondGraghView.setBarAreaHeight(rate: 0.6)
         secondGraghView.setMaxGraghValue(rate: 0.8)
         secondGraghView.setCellArea(width: 80)
+        secondGraghView.setRoundIsHiden(bool: true)
         
         secondGraghView.comparisonValue = 35
         secondGraghView.setComparisonValueLine(color: UIColor.init(red: 1.0, green: 0.2, blue: 0.2, alpha: 1.0))

@@ -122,15 +122,15 @@ class GraghViewCell: UIView {
     // MARK: - Override
     
     override func draw(_ rect: CGRect) {
-        guard let style = style else {
-            return
-        }
+        guard let style = style else { return }
         
         if let y = y, let endPoint = endPoint {
             // Graghを描画
             switch style {
             case .bar: drawBar(from: CGPoint(x: x, y: y), to: endPoint)
-            case .round: drawRound(point: endPoint)
+            case .round:
+                if let cellLayout = cellLayout, !cellLayout.onlyPathLine {
+                    drawRound(point: endPoint)}
             }
         }
         

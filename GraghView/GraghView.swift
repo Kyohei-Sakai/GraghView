@@ -229,7 +229,7 @@ class GraghView: UIScrollView {
         loadGraghView()
     }
     
-    // MARK: Set Gragh Customize
+    // MARK: Set Gragh Customize Options
     
     func setComparisonValueLabel(backgroundColor: UIColor) {
         graghLayout.comparisonLabelBackgroundColor = backgroundColor
@@ -276,6 +276,10 @@ class GraghView: UIScrollView {
         cellLayout.roundColor = color
     }
     
+    func setRoundIsHiden(bool: Bool) {
+        cellLayout.onlyPathLine = bool
+    }
+    
     
     // MARK: - Struct
     
@@ -308,9 +312,12 @@ class GraghView: UIScrollView {
         var roundSizeRate: CGFloat = 0.1
         // round color
         var roundColor = UIColor.init(red: 0.7, green: 0.7, blue: 1.0, alpha: 1.0)
+        // if round is hiden
+        var onlyPathLine: Bool = false
+        
     }
     
-    // GraghViewCellsに孵化するViewsのレイアウトを決定するためのデータ
+    // GraghViewCellsに付加するViewsのレイアウトを決定するためのデータ
     struct GraghLayoutOptions {
         // MARK: Comparison Value
         
