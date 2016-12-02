@@ -41,6 +41,7 @@ class ViewController: UIViewController {
         // optional setting
         firstGraghView.graghStyle = .bar
         firstGraghView.dateStyle = .hour
+        firstGraghView.dateInterval = 0
         
         firstGraghView.setBarWidth(rate: 0.9)
         firstGraghView.setBarAreaHeight(rate: 0.9)
@@ -61,6 +62,7 @@ class ViewController: UIViewController {
         // optional setting
         secondGraghView.graghStyle = .round
         secondGraghView.dateStyle = .minute
+        secondGraghView.dateInterval = 25
         
         secondGraghView.setRoundSize(rate: 0.1)
         secondGraghView.setBarAreaHeight(rate: 0.6)
@@ -82,6 +84,7 @@ class ViewController: UIViewController {
         // optional setting
         thirdGraghView.graghStyle = .bar
         thirdGraghView.dateStyle = .second
+        thirdGraghView.dateInterval = 16
         thirdGraghView.dataType = .yen
         
         thirdGraghView.setBarWidth(rate: 0.95)

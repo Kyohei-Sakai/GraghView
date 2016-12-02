@@ -53,12 +53,18 @@ class GraghView: UIScrollView {
     // over labelに表示する値の属性
     var dataType: GraghViewDataType = .normal
     
-    // layoutに関するデータのまとまり
+    // layoutに関するデータのまとまり(struct)
     var cellLayout = GraghViewCellLayoutOptions()
     var graghLayout = GraghLayoutOptions()
     
     // データの中の最大値 -> これをもとにBar表示領域の高さを決める
     var maxGraghValue: CGFloat? { return graghValues.max() }
+    // under label のdate間隔 default is 1
+    var dateInterval: Int = 1 {
+        willSet {
+            if newValue < 1 { return }
+        }
+    }
     
     
     // MARK: Setting ComparisonValue
@@ -111,13 +117,14 @@ class GraghView: UIScrollView {
     // MARK: - Private methods
     
     private func dateToMinimumDate(addComponentValue index: Int) -> DateComponents {
+        let componentValue = index * dateInterval
         switch dateStyle {
-        case .year: return DateComponents(year: index)
-        case .month: return DateComponents(month: index)
-        case .day: return DateComponents(day: index)
-        case .hour: return DateComponents(hour: index)
-        case .minute: return DateComponents(minute: index)
-        case .second: return DateComponents(second: index)
+        case .year: return DateComponents(year: componentValue)
+        case .month: return DateComponents(month: componentValue)
+        case .day: return DateComponents(day: componentValue)
+        case .hour: return DateComponents(hour: componentValue)
+        case .minute: return DateComponents(minute: componentValue)
+        case .second: return DateComponents(second: componentValue)
         }
     }
     
