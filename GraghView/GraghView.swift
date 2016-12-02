@@ -15,7 +15,7 @@ enum GraghStyle: Int {
 }
 
 enum GraghViewDateStyle: Int {
-    case year, month, day
+    case year, month, day, hour, minute, second
 }
 
 enum GraghViewDataType: Int {
@@ -115,6 +115,9 @@ class GraghView: UIScrollView {
         case .year: return DateComponents(year: index)
         case .month: return DateComponents(month: index)
         case .day: return DateComponents(day: index)
+        case .hour: return DateComponents(hour: index)
+        case .minute: return DateComponents(minute: index)
+        case .second: return DateComponents(second: index)
         }
     }
     

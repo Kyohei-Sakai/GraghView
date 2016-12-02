@@ -164,6 +164,9 @@ class GraghViewCell: UIView {
         case .year: dateFormatter.dateFormat = "yyyy"
         case .month: dateFormatter.dateFormat = "yyyy/MM"
         case .day: dateFormatter.dateFormat = "MM/dd"
+        case .hour: dateFormatter.dateFormat = "dd/hh:00"
+        case .minute: dateFormatter.dateFormat = "hh:mm"
+        case .second: dateFormatter.dateFormat = "mm.ss"
         }
         
         return dateFormatter.string(from: date)
