@@ -150,9 +150,20 @@ class GraghViewCell: UIView {
     }
     
     
+    // MARK: - Public methods
+    
+    // return draw point.y
+    func getEndPointForStartPoint(value: CGFloat?) -> CGFloat? {
+        guard let value = value, let maxBarAreaHeight = maxBarAreaHeight, let barAreaHeight = barAreaHeight, let y = y else { return nil }
+        
+        let averageValueHeight = barAreaHeight * value / maxBarAreaHeight
+        return y - averageValueHeight
+    }
+    
     // MARK: - Private methods
     
     // MARK: Under Label's text format
+    
     private func underTextFormatter(from date: Date) -> String {
         guard let dateStyle = dateStyle else {
             return ""
@@ -166,13 +177,14 @@ class GraghViewCell: UIView {
         case .day: dateFormatter.dateFormat = "MM/dd"
         case .hour: dateFormatter.dateFormat = "dd/HH:mm"
         case .minute: dateFormatter.dateFormat = "HH:mm"
-        case .second: dateFormatter.dateFormat = "mm.ss"
+        case .second: dateFormatter.dateFormat = "HH:mm.ss"
         }
         
         return dateFormatter.string(from: date)
     }
     
     // MARK: Over Label's text format
+    
     private func overTextFormatter(from value: CGFloat) -> String {
         guard let dataType = dataType else {
             return ""

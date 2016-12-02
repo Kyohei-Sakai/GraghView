@@ -37,6 +37,13 @@ class GraghView: UIScrollView {
     private let comparisonValueX: CGFloat = 0
     private var comparisonValueY: CGFloat?
     
+    // MARK: Setting Average Value
+    private let averageLabel = UILabel()
+    private let averageLineView = UIView()
+    private let averageValueX: CGFloat = 0
+    private var averageValueY: CGFloat?
+    
+    
     // MARK: - Public properties
     
     var graghViewCells: [GraghViewCell] = []
@@ -77,6 +84,19 @@ class GraghView: UIScrollView {
             comparisonValueLineView.isHidden = comparisonValueIsHidden
         }
     }
+    
+    // MARK: Setting Average Value
+    var averageValue: CGFloat? {
+        return graghValues.reduce(0, +) / CGFloat(graghValues.count)
+    }
+    
+    @IBInspectable var averageValueIsHidden: Bool = false {
+        didSet {
+            averageLabel.isHidden = averageValueIsHidden
+            averageLineView.isHidden = averageValueIsHidden
+        }
+    }
+    
     
     // Delegate
 //    var barDelegate: BarGraghViewDelegate?
@@ -204,6 +224,44 @@ class GraghView: UIScrollView {
         addSubview(roundPathView)
     }
     
+    // MARK: Average Value
+    
+    private func drawAverageValue() {
+        guard let averageValueY = averageValueY, let averageValue = averageValue else { return }
+        
+        drawAverageValueLine(from: CGPoint(x: averageValueX, y: averageValueY), to: CGPoint(x: contentSize.width, y: averageValueY))
+        
+        drawAverageValueLabel(frame: CGRect(x: averageValueX, y: averageValueY, width: 50, height: 20), text: overTextFormatter(from: averageValue))
+    }
+    
+    private func drawAverageValueLine(from statPoint: CGPoint, to endPoint: CGPoint) {
+        // GraghViewと同じ大きさのViewを用意
+        averageLineView.frame = CGRect(origin: .zero, size: contentSize)
+        averageLineView.backgroundColor = UIColor.clear
+        // Lineを描画
+        UIGraphicsBeginImageContextWithOptions(contentSize, false, 0)
+        let linePath = UIBezierPath()
+        linePath.lineCapStyle = .round
+        linePath.move(to: statPoint)
+        linePath.addLine(to: endPoint)
+        linePath.lineWidth = graghLayout.averageLineWidth
+        graghLayout.averageLineColor.setStroke()
+        linePath.stroke()
+        averageLineView.layer.contents = UIGraphicsGetImageFromCurrentImageContext()?.cgImage
+        UIGraphicsEndImageContext()
+        // GraghViewに重ねる
+        addSubview(averageLineView)
+    }
+    
+    private func drawAverageValueLabel(frame: CGRect, text: String) {
+        averageLabel.frame = frame
+        averageLabel.text = text
+        averageLabel.textAlignment = .center
+        averageLabel.font = comparisonValueLabel.font.withSize(10)
+        averageLabel.backgroundColor = graghLayout.comparisonLabelBackgroundColor
+        addSubview(averageLabel)
+    }
+    
     
     // MARK: - Public methods
     
@@ -223,11 +281,13 @@ class GraghView: UIScrollView {
                 addSubview(cell)
                 
                 self.comparisonValueY = cell.comparisonValueY
+                self.averageValueY = cell.getEndPointForStartPoint(value: averageValue)
             }
         }
         
         drawPathToRound()
         drawComparisonValue()
+        drawAverageValue()
         
     }
     
@@ -343,6 +403,12 @@ class GraghView: UIScrollView {
         // MARK: Round Path
         
         var roundPathWidth: CGFloat = 2
+        
+        // MARK: Average Value
+        var avarageLabelBackgroundColor = UIColor.init(red: 0.8, green: 0.7, blue: 1, alpha: 0.7)
+        var averageLineColor = UIColor.init(red: 0.7, green: 0.6, blue: 0.9, alpha: 1)
+        var averageLineWidth: CGFloat = 1
+        
         
     }
     
