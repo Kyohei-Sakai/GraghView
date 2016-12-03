@@ -22,6 +22,10 @@ enum GraghViewDataType: Int {
     case normal, yen
 }
 
+enum GraghViewContetOffset: Int {
+    case atMinimumDate, atMaximizeDate
+}
+
 
 // MARK: - GraghView Class
 
@@ -59,6 +63,8 @@ class GraghView: UIScrollView {
     var dateStyle: GraghViewDateStyle = .month
     // over labelに表示する値の属性
     var dataType: GraghViewDataType = .normal
+    // グラフの前から表示するか、後ろからか
+    var contentOffsetControll: GraghViewContetOffset = .atMinimumDate
     
     // layoutに関するデータのまとまり(struct)
     var cellLayout = GraghViewCellLayoutOptions()
@@ -288,6 +294,12 @@ class GraghView: UIScrollView {
         drawPathToRound()
         drawComparisonValue()
         drawAverageValue()
+        
+        switch contentOffsetControll {
+        case .atMinimumDate: contentOffset.x = 0
+        case .atMaximizeDate: contentOffset.x = contentSize.width - frame.width
+        }
+        
         
     }
     
