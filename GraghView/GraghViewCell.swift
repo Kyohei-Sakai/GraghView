@@ -201,12 +201,12 @@ class GraghViewCell: UIView {
     // MARK: Drawing
     
     private func drawBar(from startPoint: CGPoint, to endPoint: CGPoint) {
-        let barPath = UIBezierPath()
-        barPath.move(to: startPoint)
-        barPath.addLine(to: endPoint)
-        barPath.lineWidth = barWidth ?? 0
-        cellLayout?.barColor.setStroke()
-        barPath.stroke()
+        let origin = CGPoint(x: startPoint.x - (barWidth ?? 0) / 2, y: endPoint.y)
+        let size = CGSize(width: barWidth ?? 0, height: barHeigth ?? 0)
+        
+        let barPath = UIBezierPath(roundedRect: CGRect(origin: origin, size: size), byRoundingCorners: .init(rawValue: 3), cornerRadii: CGSize(width: 20, height: 20))
+        cellLayout?.barColor.setFill()
+        barPath.fill()
     }
     
     private func drawRound(point: CGPoint) {
