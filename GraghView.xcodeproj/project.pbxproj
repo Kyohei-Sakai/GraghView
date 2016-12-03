@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F8E80251DF2F25E00636CD4 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F8E80241DF2F25E00636CD4 /* UIColorExtension.swift */; };
 		7FDD1D741DEB2A3D0049F235 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDD1D731DEB2A3D0049F235 /* AppDelegate.swift */; };
 		7FDD1D761DEB2A3D0049F235 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDD1D751DEB2A3D0049F235 /* ViewController.swift */; };
 		7FDD1D791DEB2A3D0049F235 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FDD1D771DEB2A3D0049F235 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7F8E80241DF2F25E00636CD4 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		7FDD1D701DEB2A3D0049F235 /* GraghView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GraghView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FDD1D731DEB2A3D0049F235 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7FDD1D751DEB2A3D0049F235 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				7FDD1D751DEB2A3D0049F235 /* ViewController.swift */,
 				7FDD1DA11DEB2A880049F235 /* GraghView.swift */,
 				7FDD1DA31DEB2AA20049F235 /* GraghViewCell.swift */,
+				7F8E80241DF2F25E00636CD4 /* UIColorExtension.swift */,
 				7FDD1D771DEB2A3D0049F235 /* Main.storyboard */,
 				7FDD1D7A1DEB2A3D0049F235 /* Assets.xcassets */,
 				7FDD1D7C1DEB2A3D0049F235 /* LaunchScreen.storyboard */,
@@ -270,6 +273,7 @@
 			files = (
 				7FDD1D761DEB2A3D0049F235 /* ViewController.swift in Sources */,
 				7FDD1DA21DEB2A880049F235 /* GraghView.swift in Sources */,
+				7F8E80251DF2F25E00636CD4 /* UIColorExtension.swift in Sources */,
 				7FDD1DA41DEB2AA20049F235 /* GraghViewCell.swift in Sources */,
 				7FDD1D741DEB2A3D0049F235 /* AppDelegate.swift in Sources */,
 			);
@@ -522,6 +526,7 @@
 				7FDD1D9A1DEB2A3D0049F235 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7FDD1D9B1DEB2A3D0049F235 /* Build configuration list for PBXNativeTarget "GraghViewTests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +535,7 @@
 				7FDD1D9D1DEB2A3D0049F235 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7FDD1D9E1DEB2A3D0049F235 /* Build configuration list for PBXNativeTarget "GraghViewUITests" */ = {
 			isa = XCConfigurationList;
@@ -538,6 +544,7 @@
 				7FDD1DA01DEB2A3D0049F235 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
