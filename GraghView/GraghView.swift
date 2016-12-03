@@ -10,19 +10,19 @@ import UIKit
 
 // MARK: - Enumeration
 
-enum GraghStyle: Int {
+enum GraghStyle {
     case bar, round, jaggy
 }
 
-enum GraghViewDateStyle: Int {
+enum GraghViewDateStyle {
     case year, month, day, hour, minute, second
 }
 
-enum GraghViewDataType: Int {
+enum GraghViewDataType {
     case normal, yen
 }
 
-enum GraghViewContetOffset: Int {
+enum GraghViewContetOffset {
     case atMinimumDate, atMaximizeDate
 }
 
