@@ -82,7 +82,7 @@ class ViewController: UIViewController {
         thirdGraghView.minimumDate = minimumDate
         
         // optional setting
-        thirdGraghView.graghStyle = .bar
+        thirdGraghView.graghStyle = .jaggy
         thirdGraghView.dateStyle = .second
         thirdGraghView.dateInterval = 20
         thirdGraghView.dataType = .yen

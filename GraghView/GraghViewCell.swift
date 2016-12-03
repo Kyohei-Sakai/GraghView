@@ -141,6 +141,7 @@ class GraghViewCell: UIView {
             switch style {
             case .bar: drawBar(from: CGPoint(x: x, y: y), to: endPoint)
             case .round: drawRound(point: endPoint)
+            case .jaggy: drawJaggy(point: endPoint, otherPoint1: CGPoint(x: 0, y: y), otherPoint2: CGPoint(x: frame.width, y: y))
             }
         }
         
@@ -200,12 +201,12 @@ class GraghViewCell: UIView {
     // MARK: Drawing
     
     private func drawBar(from startPoint: CGPoint, to endPoint: CGPoint) {
-        let BarPath = UIBezierPath()
-        BarPath.move(to: startPoint)
-        BarPath.addLine(to: endPoint)
-        BarPath.lineWidth = barWidth ?? 0
+        let barPath = UIBezierPath()
+        barPath.move(to: startPoint)
+        barPath.addLine(to: endPoint)
+        barPath.lineWidth = barWidth ?? 0
         cellLayout?.barColor.setStroke()
-        BarPath.stroke()
+        barPath.stroke()
     }
     
     private func drawRound(point: CGPoint) {
@@ -216,6 +217,18 @@ class GraghViewCell: UIView {
         let round = UIBezierPath(ovalIn: CGRect(origin: origin, size: size))
         cellLayout.roundColor.setFill()
         round.fill()
+    }
+    
+    private func drawJaggy(point: CGPoint, otherPoint1: CGPoint, otherPoint2: CGPoint) {
+        let jaggyPath = UIBezierPath()
+        // add path from left point
+        jaggyPath.move(to: otherPoint1)
+        jaggyPath.addLine(to: point)
+        jaggyPath.addLine(to: otherPoint2)
+        jaggyPath.close()
+        cellLayout?.jaggyColor.setFill()
+        jaggyPath.fill()
+        
     }
     
     private func drawOverLabel() {

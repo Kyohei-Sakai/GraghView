@@ -11,7 +11,7 @@ import UIKit
 // MARK: - Enumeration
 
 enum GraghStyle: Int {
-    case bar, round
+    case bar, round, jaggy
 }
 
 enum GraghViewDateStyle: Int {
@@ -389,6 +389,12 @@ class GraghView: UIScrollView {
         var roundColor = UIColor.init(red: 0.7, green: 0.7, blue: 1.0, alpha: 1.0)
         // if round is hidden
         var onlyPathLine: Bool = false
+        
+        // MARK: Only Jaggy
+        
+        // jaggy color
+        var jaggyColor = UIColor.init(red: 1.0, green: 1.0, blue: 0.6, alpha: 1.0)
+        
         
     }
     
