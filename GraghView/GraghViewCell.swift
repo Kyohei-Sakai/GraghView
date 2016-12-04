@@ -143,7 +143,6 @@ class GraghViewCell: UIView {
             case .round: drawRound(point: endPoint)
             case .jaggy: drawJaggy(point: endPoint, otherPoint1: CGPoint(x: 0, y: y), otherPoint2: CGPoint(x: frame.width, y: y))
             }
-            print("y = \(y)")
         }
         
         drawOverLabel()
@@ -250,7 +249,6 @@ class GraghViewCell: UIView {
         let underLabel: UILabel = UILabel()
         underLabel.frame = CGRect(x: 0, y: 0, width: frame.width, height: labelHeight)
         underLabel.center = CGPoint(x: x, y: frame.height - labelHeight / 2)
-        print("y = \(underLabel.frame.origin.y)")
         underLabel.text = underTextFormatter(from: date)
         underLabel.textAlignment = .center
         underLabel.font = underLabel.font.withSize(10)
