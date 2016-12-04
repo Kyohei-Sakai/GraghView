@@ -67,8 +67,8 @@ class GraghView: UIScrollView {
     var contentOffsetControll: GraghViewContetOffset = .minimumDate
     
     // layoutに関するデータのまとまり(struct)
-    var cellLayout = GraghViewCellLayoutOptions()
-    var graghLayout = GraghLayoutOptions()
+    var cellLayout = CellLayoutOptions()
+    var graghLayout = LayoutOptions()
     
     // データの中の最大値 -> これをもとにBar表示領域の高さを決める
     var maxGraghValue: CGFloat? { return graghValues.max() }
@@ -370,7 +370,7 @@ class GraghView: UIScrollView {
     // MARK: - Struct
     
     // GraghViewCellのレイアウトを決定するためのデータ
-    struct GraghViewCellLayoutOptions {
+    struct CellLayoutOptions {
         // MARK: Shared
         
         // cellAreaHeight / frame.height
@@ -411,7 +411,7 @@ class GraghView: UIScrollView {
     }
     
     // GraghViewCellsに付加するViewsのレイアウトを決定するためのデータ
-    struct GraghLayoutOptions {
+    struct LayoutOptions {
         // MARK: Comparison Value
         
         var comparisonLabelBackgroundColor = UIColor.lightGray.withAlphaComponent(0.7)
