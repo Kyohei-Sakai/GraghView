@@ -32,7 +32,7 @@ class GraghViewCell: UIView {
     private var dateStyle: GraghViewDateStyle?
     private var dataType: GraghViewDataType?
     
-    private let cellLayout: GraghView.GraghViewCellLayoutOptions?
+    private let cellLayout: GraghView.CellLayoutOptions?
     
     private var graghValue: CGFloat
     private var maxGraghValue: CGFloat? { return graghView?.maxGraghValue }
