@@ -63,7 +63,7 @@ class ViewController: UIViewController {
         secondGraghView.graghStyle = .round
         secondGraghView.dateStyle = .minute
         secondGraghView.dateInterval = 30
-        secondGraghView.contentOffsetControll = .atMaximizeDate
+        secondGraghView.contentOffsetControll = .maximizeDate
         
         secondGraghView.setRoundSize(rate: 0.1)
         secondGraghView.setBarAreaHeight(rate: 0.6)

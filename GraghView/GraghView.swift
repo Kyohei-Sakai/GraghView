@@ -23,7 +23,7 @@ enum GraghViewDataType {
 }
 
 enum GraghViewContetOffset {
-    case atMinimumDate, atMaximizeDate
+    case minimumDate, maximizeDate
 }
 
 
@@ -64,7 +64,7 @@ class GraghView: UIScrollView {
     // over labelに表示する値の属性
     var dataType: GraghViewDataType = .normal
     // グラフの前から表示するか、後ろからか
-    var contentOffsetControll: GraghViewContetOffset = .atMinimumDate
+    var contentOffsetControll: GraghViewContetOffset = .minimumDate
     
     // layoutに関するデータのまとまり(struct)
     var cellLayout = GraghViewCellLayoutOptions()
@@ -296,8 +296,8 @@ class GraghView: UIScrollView {
         drawAverageValue()
         
         switch contentOffsetControll {
-        case .atMinimumDate: contentOffset.x = 0
-        case .atMaximizeDate: contentOffset.x = contentSize.width - frame.width
+        case .minimumDate: contentOffset.x = 0
+        case .maximizeDate: contentOffset.x = contentSize.width - frame.width
         }
         
         
