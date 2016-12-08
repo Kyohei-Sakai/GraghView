@@ -292,10 +292,12 @@ class GraghView: UIScrollView {
         drawComparisonValue()
         drawAverageValue()
         
-        switch contentOffsetControll {
-        case .minimumDate: contentOffset.x = 0
-        case .maximizeDate: contentOffset.x = contentSize.width - frame.width
-        }
+        contentOffset.x = {
+            switch contentOffsetControll {
+            case .minimumDate: return 0
+            case .maximizeDate: return contentSize.width - frame.width
+            }
+        }()
         
     }
     
