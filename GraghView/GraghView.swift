@@ -26,6 +26,10 @@ enum GraghViewContetOffset {
     case minimumDate, maximizeDate
 }
 
+enum GraghViewDataLabelType {
+    case `default`, date
+}
+
 
 // MARK: - GraghView Class
 
@@ -55,20 +59,26 @@ class GraghView: UIScrollView {
     // データ配列
     var graghValues: [CGFloat] = []
     // グラフのラベルに表示する情報
+    var xAxisLabels: [String] = []
     var minimumDate: Date?
     
+    
     // garghの種類
-    var graghStyle: GraghStyle = .bar
+    var style: GraghStyle = .bar
     // under labelに表示するDate間隔
     var dateStyle: GraghViewDateStyle = .month
     // over labelに表示する値の属性
     var dataType: GraghViewDataType = .normal
     // グラフの前から表示するか、後ろからか
     var contentOffsetControll: GraghViewContetOffset = .minimumDate
+    // under labelを生成する際に参照する情報
+    var dataLabelType:GraghViewDataLabelType = .default
+    
     
     // layoutに関するデータのまとまり(struct)
     var cellLayout = CellLayoutOptions()
-    var graghLayout = LayoutOptions()
+    var layout = LayoutOptions()
+    
     
     // データの中の最大値 -> これをもとにBar表示領域の高さを決める
     var maxGraghValue: CGFloat? { return graghValues.max() }
@@ -118,7 +128,7 @@ class GraghView: UIScrollView {
         self.init(frame: frame)
         self.graghValues = graghValues
         self.minimumDate = minimumDate
-        self.graghStyle = style
+        self.style = style
         loadGraghView()
     }
     
@@ -176,8 +186,8 @@ class GraghView: UIScrollView {
         linePath.lineCapStyle = .round
         linePath.move(to: statPoint)
         linePath.addLine(to: endPoint)
-        linePath.lineWidth = graghLayout.comparisonLineWidth
-        graghLayout.comparisonLineColor.setStroke()
+        linePath.lineWidth = layout.comparisonLineWidth
+        layout.comparisonLineColor.setStroke()
         linePath.stroke()
         comparisonValueLineView.layer.contents = UIGraphicsGetImageFromCurrentImageContext()?.cgImage
         UIGraphicsEndImageContext()
@@ -190,7 +200,7 @@ class GraghView: UIScrollView {
         comparisonValueLabel.text = text
         comparisonValueLabel.textAlignment = .center
         comparisonValueLabel.font = comparisonValueLabel.font.withSize(10)
-        comparisonValueLabel.backgroundColor = graghLayout.comparisonLabelBackgroundColor
+        comparisonValueLabel.backgroundColor = layout.comparisonLabelBackgroundColor
         addSubview(comparisonValueLabel)
     }
     
@@ -205,7 +215,7 @@ class GraghView: UIScrollView {
     // MARK: Round Path
     
     func drawPathToRound() {
-        if graghStyle != .round { return }
+        if style != .round { return }
         
         guard let firstCell = graghViewCells.first, let startPoint = firstCell.endPoint else { return }
         
@@ -221,7 +231,7 @@ class GraghView: UIScrollView {
                 path.addLine(to: CGPoint(x: endPoint.x + CGFloat(index) * cellLayout.cellAreaWidth, y: endPoint.y))
             }
         }
-        path.lineWidth = graghLayout.roundPathWidth
+        path.lineWidth = layout.roundPathWidth
         cellLayout.roundColor.setStroke()
         path.stroke()
         roundPathView.layer.contents = UIGraphicsGetImageFromCurrentImageContext()?.cgImage
@@ -250,8 +260,8 @@ class GraghView: UIScrollView {
         linePath.lineCapStyle = .round
         linePath.move(to: statPoint)
         linePath.addLine(to: endPoint)
-        linePath.lineWidth = graghLayout.averageLineWidth
-        graghLayout.averageLineColor.setStroke()
+        linePath.lineWidth = layout.averageLineWidth
+        layout.averageLineColor.setStroke()
         linePath.stroke()
         averageLineView.layer.contents = UIGraphicsGetImageFromCurrentImageContext()?.cgImage
         UIGraphicsEndImageContext()
@@ -264,7 +274,7 @@ class GraghView: UIScrollView {
         averageLabel.text = text
         averageLabel.textAlignment = .center
         averageLabel.font = comparisonValueLabel.font.withSize(10)
-        averageLabel.backgroundColor = graghLayout.comparisonLabelBackgroundColor
+        averageLabel.backgroundColor = layout.comparisonLabelBackgroundColor
         addSubview(averageLabel)
     }
     
@@ -272,6 +282,43 @@ class GraghView: UIScrollView {
     // MARK: - Public methods
     
     func loadGraghView() {
+        
+        switch dataLabelType {
+        case .default: drawCellsOfTextLabel()
+        case .date: drawCellsOfDateLabel()
+        }
+        
+        drawPathToRound()
+        drawComparisonValue()
+        drawAverageValue()
+        
+        contentOffset.x = {
+            switch contentOffsetControll {
+            case .minimumDate: return 0
+            case .maximizeDate: return contentSize.width - frame.width
+            }
+        }()
+        
+    }
+    
+    private func drawCellsOfTextLabel() {
+        contentSize.height = frame.height
+        
+        for index in 0..<graghValues.count {
+            contentSize.width += cellLayout.cellAreaWidth
+            // barの表示をずらしていく
+            let rect = CGRect(origin: CGPoint(x: CGFloat(index) * cellLayout.cellAreaWidth, y: 0), size: CGSize(width: cellLayout.cellAreaWidth, height: frame.height))
+            
+            let cell = GraghViewCell(frame: rect, graghValue: graghValues[index], labelText: xAxisLabels[index], comparisonValue: comparisonValue, target: self)
+            
+            addSubview(cell)
+            
+            self.comparisonValueY = cell.comparisonValueY
+            self.averageValueY = cell.getEndPointForStartPoint(value: averageValue)
+        }
+    }
+    
+    private func drawCellsOfDateLabel() {
         let calendar = Calendar(identifier: .gregorian)
         contentSize.height = frame.height
         
@@ -290,17 +337,6 @@ class GraghView: UIScrollView {
                 self.averageValueY = cell.getEndPointForStartPoint(value: averageValue)
             }
         }
-        
-        drawPathToRound()
-        drawComparisonValue()
-        drawAverageValue()
-        
-        switch contentOffsetControll {
-        case .minimumDate: contentOffset.x = 0
-        case .maximizeDate: contentOffset.x = contentSize.width - frame.width
-        }
-        
-        
     }
     
     func reloadGraghView() {
@@ -314,11 +350,11 @@ class GraghView: UIScrollView {
     // MARK: Set Gragh Customize Options
     
     func setComparisonValueLabel(backgroundColor: UIColor) {
-        graghLayout.comparisonLabelBackgroundColor = backgroundColor
+        layout.comparisonLabelBackgroundColor = backgroundColor
     }
     
     func setComparisonValueLine(color: UIColor) {
-        graghLayout.comparisonLineColor = color
+        layout.comparisonLineColor = color
     }
     
     // BarのLayoutProportionはGraghViewから変更する

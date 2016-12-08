@@ -37,6 +37,7 @@ class GraghViewCell: UIView {
     private var graghValue: CGFloat
     private var maxGraghValue: CGFloat? { return graghView?.maxGraghValue }
     
+    private var labelText: String?
     private var date: Date?
     private var comparisonValue: CGFloat?
     
@@ -106,15 +107,33 @@ class GraghViewCell: UIView {
     
     // MARK: - Initializers
     
+    // date label
     init(frame: CGRect, graghValue: CGFloat, date: Date, comparisonValue: CGFloat, target graghView: GraghView? = nil) {
         self.graghView = graghView
-        self.style = graghView?.graghStyle
+        self.style = graghView?.style
         self.dateStyle = graghView?.dateStyle
         self.dataType = graghView?.dataType
         self.cellLayout = graghView?.cellLayout
         
         self.graghValue = graghValue
         self.date = date
+        self.comparisonValue = comparisonValue
+        
+        super.init(frame: frame)
+        self.backgroundColor = cellLayout?.GraghBackgroundColor
+        self.graghView?.graghViewCells.append(self)
+    }
+    
+    // string label (default init)
+    init(frame: CGRect, graghValue: CGFloat, labelText: String, comparisonValue: CGFloat, target graghView: GraghView? = nil) {
+        self.graghView = graghView
+        self.style = graghView?.style
+        self.dateStyle = graghView?.dateStyle
+        self.dataType = graghView?.dataType
+        self.cellLayout = graghView?.cellLayout
+        
+        self.graghValue = graghValue
+        self.labelText = labelText
         self.comparisonValue = comparisonValue
         
         super.init(frame: frame)
@@ -244,12 +263,19 @@ class GraghViewCell: UIView {
     }
     
     private func drawUnderLabel() {
-        guard let labelHeight = labelHeight, let date = date else { return }
+        guard let labelHeight = labelHeight, let graghView = graghView else { return }
         
         let underLabel: UILabel = UILabel()
         underLabel.frame = CGRect(x: 0, y: 0, width: frame.width, height: labelHeight)
         underLabel.center = CGPoint(x: x, y: frame.height - labelHeight / 2)
-        underLabel.text = underTextFormatter(from: date)
+        
+        switch graghView.dataLabelType {
+        case .default:
+            underLabel.text = labelText
+        case .date:
+            if let date = date { underLabel.text = underTextFormatter(from: date) }
+        }
+        
         underLabel.textAlignment = .center
         underLabel.font = underLabel.font.withSize(10)
         underLabel.backgroundColor = cellLayout?.labelBackgroundColor
