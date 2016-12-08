@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     
     let graghData: [CGFloat] = [30, 50, 19, 22, 46, 10, 1, 66, 35, 49]
     var dataLabels: [String] {
-        var labels = [String]()
+        var labels: [String] = []
         for index in 0..<graghData.count {
             labels.append("DEC \(index + 1)")
         }
