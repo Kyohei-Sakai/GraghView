@@ -110,7 +110,7 @@ class GraghViewCell: UIView {
     // date label
     init(frame: CGRect, graghValue: CGFloat, date: Date, comparisonValue: CGFloat, target graghView: GraghView? = nil) {
         self.graghView = graghView
-        self.style = graghView?.graghStyle
+        self.style = graghView?.style
         self.dateStyle = graghView?.dateStyle
         self.dataType = graghView?.dataType
         self.cellLayout = graghView?.cellLayout
@@ -127,7 +127,7 @@ class GraghViewCell: UIView {
     // string label (default init)
     init(frame: CGRect, graghValue: CGFloat, labelText: String, comparisonValue: CGFloat, target graghView: GraghView? = nil) {
         self.graghView = graghView
-        self.style = graghView?.graghStyle
+        self.style = graghView?.style
         self.dateStyle = graghView?.dateStyle
         self.dataType = graghView?.dataType
         self.cellLayout = graghView?.cellLayout

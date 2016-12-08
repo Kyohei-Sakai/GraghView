@@ -43,12 +43,12 @@ class ViewController: UIViewController {
     private func setFirstGraghOption() {
         // most setting
         firstGraghView.graghValues = graghData
-        firstGraghView.graghLabels = dataLabels
+        firstGraghView.xAxisLabels = dataLabels
 //        firstGraghView.minimumDate = minimumDate
 //        firstGraghView.dataLabelType = .date
         
         // optional setting
-        firstGraghView.graghStyle = .bar
+        firstGraghView.style = .bar
         firstGraghView.dateStyle = .hour
         firstGraghView.dateInterval = 2
         
@@ -70,7 +70,7 @@ class ViewController: UIViewController {
         secondGraghView.dataLabelType = .date
         
         // optional setting
-        secondGraghView.graghStyle = .round
+        secondGraghView.style = .round
         secondGraghView.dateStyle = .minute
         secondGraghView.dateInterval = 30
         secondGraghView.contentOffsetControll = .maximizeDate
@@ -94,7 +94,7 @@ class ViewController: UIViewController {
         thirdGraghView.dataLabelType = .date
         
         // optional setting
-        thirdGraghView.graghStyle = .jaggy
+        thirdGraghView.style = .jaggy
         thirdGraghView.dateStyle = .second
         thirdGraghView.dateInterval = 20
         thirdGraghView.dataType = .yen
