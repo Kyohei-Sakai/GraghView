@@ -16,6 +16,13 @@ class ViewController: UIViewController {
     
     
     let graghData: [CGFloat] = [30, 50, 19, 22, 46, 10, 1, 66, 35, 49]
+    var dataLabels: [String] {
+        var labels = [String]()
+        for index in 0..<graghData.count {
+            labels.append("DEC \(index + 1)")
+        }
+        return labels
+    }
     var minimumDate: Date { return Date() }
     
     
@@ -36,7 +43,9 @@ class ViewController: UIViewController {
     private func setFirstGraghOption() {
         // most setting
         firstGraghView.graghValues = graghData
-        firstGraghView.minimumDate = minimumDate
+        firstGraghView.graghLabels = dataLabels
+//        firstGraghView.minimumDate = minimumDate
+//        firstGraghView.dataLabelType = .date
         
         // optional setting
         firstGraghView.graghStyle = .bar
@@ -58,6 +67,7 @@ class ViewController: UIViewController {
         // most setting
         secondGraghView.graghValues = graghData
         secondGraghView.minimumDate = minimumDate
+        secondGraghView.dataLabelType = .date
         
         // optional setting
         secondGraghView.graghStyle = .round
@@ -81,6 +91,7 @@ class ViewController: UIViewController {
         // most setting
         thirdGraghView.graghValues = graghData
         thirdGraghView.minimumDate = minimumDate
+        thirdGraghView.dataLabelType = .date
         
         // optional setting
         thirdGraghView.graghStyle = .jaggy

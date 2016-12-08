@@ -26,6 +26,10 @@ enum GraghViewContetOffset {
     case minimumDate, maximizeDate
 }
 
+enum GraghViewDataLabelType {
+    case normal, date
+}
+
 
 // MARK: - GraghView Class
 
@@ -55,7 +59,9 @@ class GraghView: UIScrollView {
     // データ配列
     var graghValues: [CGFloat] = []
     // グラフのラベルに表示する情報
+    var graghLabels: [String] = []
     var minimumDate: Date?
+    
     
     // garghの種類
     var graghStyle: GraghStyle = .bar
@@ -65,10 +71,14 @@ class GraghView: UIScrollView {
     var dataType: GraghViewDataType = .normal
     // グラフの前から表示するか、後ろからか
     var contentOffsetControll: GraghViewContetOffset = .minimumDate
+    // under labelを生成する際に参照する情報
+    var dataLabelType:GraghViewDataLabelType = .normal
+    
     
     // layoutに関するデータのまとまり(struct)
     var cellLayout = CellLayoutOptions()
     var graghLayout = LayoutOptions()
+    
     
     // データの中の最大値 -> これをもとにBar表示領域の高さを決める
     var maxGraghValue: CGFloat? { return graghValues.max() }
@@ -272,6 +282,40 @@ class GraghView: UIScrollView {
     // MARK: - Public methods
     
     func loadGraghView() {
+        
+        switch dataLabelType {
+        case .normal: drawCellsOfTextLabel()
+        case .date: drawCellsOfDateLabel()
+        }
+        
+        drawPathToRound()
+        drawComparisonValue()
+        drawAverageValue()
+        
+        switch contentOffsetControll {
+        case .minimumDate: contentOffset.x = 0
+        case .maximizeDate: contentOffset.x = contentSize.width - frame.width
+        }
+        
+    }
+    
+    private func drawCellsOfTextLabel() {
+        for index in 0..<graghValues.count {
+            contentSize.width += cellLayout.cellAreaWidth
+            // barの表示をずらしていく
+            let rect = CGRect(origin: CGPoint(x: CGFloat(index) * cellLayout.cellAreaWidth, y: 0), size: CGSize(width: cellLayout.cellAreaWidth, height: frame.height))
+            
+            let cell = GraghViewCell(frame: rect, graghValue: graghValues[index], labelText: graghLabels[index], comparisonValue: comparisonValue, target: self)
+            
+            addSubview(cell)
+            
+            self.comparisonValueY = cell.comparisonValueY
+            self.averageValueY = cell.getEndPointForStartPoint(value: averageValue)
+        }
+        
+    }
+    
+    private func drawCellsOfDateLabel() {
         let calendar = Calendar(identifier: .gregorian)
         contentSize.height = frame.height
         
@@ -290,17 +334,6 @@ class GraghView: UIScrollView {
                 self.averageValueY = cell.getEndPointForStartPoint(value: averageValue)
             }
         }
-        
-        drawPathToRound()
-        drawComparisonValue()
-        drawAverageValue()
-        
-        switch contentOffsetControll {
-        case .minimumDate: contentOffset.x = 0
-        case .maximizeDate: contentOffset.x = contentSize.width - frame.width
-        }
-        
-        
     }
     
     func reloadGraghView() {
