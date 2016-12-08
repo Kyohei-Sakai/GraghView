@@ -270,7 +270,7 @@ class GraghViewCell: UIView {
         underLabel.center = CGPoint(x: x, y: frame.height - labelHeight / 2)
         
         switch graghView.dataLabelType {
-        case .normal:
+        case .default:
             underLabel.text = labelText
         case .date:
             if let date = date { underLabel.text = underTextFormatter(from: date) }

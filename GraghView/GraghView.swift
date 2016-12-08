@@ -27,7 +27,7 @@ enum GraghViewContetOffset {
 }
 
 enum GraghViewDataLabelType {
-    case normal, date
+    case `default`, date
 }
 
 
@@ -72,7 +72,7 @@ class GraghView: UIScrollView {
     // グラフの前から表示するか、後ろからか
     var contentOffsetControll: GraghViewContetOffset = .minimumDate
     // under labelを生成する際に参照する情報
-    var dataLabelType:GraghViewDataLabelType = .normal
+    var dataLabelType:GraghViewDataLabelType = .default
     
     
     // layoutに関するデータのまとまり(struct)
@@ -284,7 +284,7 @@ class GraghView: UIScrollView {
     func loadGraghView() {
         
         switch dataLabelType {
-        case .normal: drawCellsOfTextLabel()
+        case .default: drawCellsOfTextLabel()
         case .date: drawCellsOfDateLabel()
         }
         
