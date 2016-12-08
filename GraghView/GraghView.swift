@@ -302,6 +302,8 @@ class GraghView: UIScrollView {
     }
     
     private func drawCellsOfTextLabel() {
+        contentSize.height = frame.height
+        
         for index in 0..<graghValues.count {
             contentSize.width += cellLayout.cellAreaWidth
             // barの表示をずらしていく
@@ -314,7 +316,6 @@ class GraghView: UIScrollView {
             self.comparisonValueY = cell.comparisonValueY
             self.averageValueY = cell.getEndPointForStartPoint(value: averageValue)
         }
-        
     }
     
     private func drawCellsOfDateLabel() {
