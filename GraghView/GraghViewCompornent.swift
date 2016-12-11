@@ -1,5 +1,5 @@
 //
-//  GraghViewCell.swift
+//  GraghViewComponent.swift
 //  GraghView
 //
 //  Created by 酒井恭平 on 2016/11/27.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-// MARK: - GraghViewCell Class
+// MARK: - GraghViewComponent Class
 
-class GraghViewCell: UIView {
+class GraghViewComponent: UIView {
     // MARK: - Pablic properties
     
     var endPoint: CGPoint? {
@@ -32,7 +32,7 @@ class GraghViewCell: UIView {
     private var dateStyle: GraghViewDateStyle?
     private var dataType: GraghViewDataType?
     
-    private let cellLayout: GraghView.CellLayoutOptions?
+    private let layout: GraghView.ComponentLayoutOptions?
     
     private var graghValue: CGFloat
     private var maxGraghValue: CGFloat? { return graghView?.maxGraghValue }
@@ -42,13 +42,13 @@ class GraghViewCell: UIView {
     private var comparisonValue: CGFloat?
     
     private var maxBarAreaHeight: CGFloat? {
-        guard let maxGraghValue = maxGraghValue, let cellLayout = cellLayout else { return nil }
-        return maxGraghValue / cellLayout.maxGraghValueRate
+        guard let maxGraghValue = maxGraghValue, let layout = layout else { return nil }
+        return maxGraghValue / layout.maxGraghValueRate
     }
     
     private var barAreaHeight: CGFloat? {
-        guard let cellLayout = cellLayout else { return nil }
-        return frame.height * cellLayout.barAreaHeightRate
+        guard let layout = layout else { return nil }
+        return frame.height * layout.barAreaHeightRate
     }
     
     private var barHeigth: CGFloat? {
@@ -63,7 +63,7 @@ class GraghViewCell: UIView {
     }
     
     private var labelHeight: CGFloat? {
-        guard let barAreaHeight = barAreaHeight, let isHidden = cellLayout?.valueLabelIsHidden else { return nil }
+        guard let barAreaHeight = barAreaHeight, let isHidden = layout?.valueLabelIsHidden else { return nil }
         
         if isHidden {
             return frame.height - barAreaHeight
@@ -80,15 +80,15 @@ class GraghViewCell: UIView {
     // MARK: Only Bar
     
     private var barWidth: CGFloat? {
-        guard let cellLayout = cellLayout else { return nil }
-        return frame.width * cellLayout.barWidthRate
+        guard let layout = layout else { return nil }
+        return frame.width * layout.barWidthRate
     }
     
     // barの始点のX座標（＝終点のX座標）
     private var x: CGFloat { return frame.width / 2 }
     // barの始点のY座標
     private var y: CGFloat? {
-        guard let barAreaHeight = barAreaHeight, let labelHeight = labelHeight, let isHidden = cellLayout?.valueLabelIsHidden else { return nil }
+        guard let barAreaHeight = barAreaHeight, let labelHeight = labelHeight, let isHidden = layout?.valueLabelIsHidden else { return nil }
         
         if isHidden {
             return barAreaHeight
@@ -101,7 +101,7 @@ class GraghViewCell: UIView {
     // MARK: Only Round
     
     private var roundSize: CGFloat? {
-        guard let roundSizeRate = cellLayout?.roundSizeRate else { return nil }
+        guard let roundSizeRate = layout?.roundSizeRate else { return nil }
         return roundSizeRate * frame.width
     }
     
@@ -113,15 +113,15 @@ class GraghViewCell: UIView {
         self.style = graghView?.style
         self.dateStyle = graghView?.dateStyle
         self.dataType = graghView?.dataType
-        self.cellLayout = graghView?.cellLayout
+        self.layout = graghView?.componentLayout
         
         self.graghValue = graghValue
         self.date = date
         self.comparisonValue = comparisonValue
         
         super.init(frame: frame)
-        self.backgroundColor = cellLayout?.GraghBackgroundColor
-        self.graghView?.graghViewCells.append(self)
+        self.backgroundColor = layout?.GraghBackgroundColor
+        self.graghView?.components.append(self)
     }
     
     // string label (default init)
@@ -130,21 +130,21 @@ class GraghViewCell: UIView {
         self.style = graghView?.style
         self.dateStyle = graghView?.dateStyle
         self.dataType = graghView?.dataType
-        self.cellLayout = graghView?.cellLayout
+        self.layout = graghView?.componentLayout
         
         self.graghValue = graghValue
         self.labelText = labelText
         self.comparisonValue = comparisonValue
         
         super.init(frame: frame)
-        self.backgroundColor = cellLayout?.GraghBackgroundColor
-        self.graghView?.graghViewCells.append(self)
+        self.backgroundColor = layout?.GraghBackgroundColor
+        self.graghView?.components.append(self)
     }
     
     // storyboardで生成する時
     required init?(coder aDecoder: NSCoder) {
         self.graghValue = 0
-        self.cellLayout = nil
+        self.layout = nil
         super.init(coder: aDecoder)
 //        fatalError("init(coder:) has not been implemented")
     }
@@ -222,17 +222,17 @@ class GraghViewCell: UIView {
         let size = CGSize(width: barWidth ?? 0, height: barHeigth ?? 0)
         
         let barPath = UIBezierPath(roundedRect: CGRect(origin: origin, size: size), byRoundingCorners: .init(rawValue: 3), cornerRadii: CGSize(width: 20, height: 20))
-        cellLayout?.barColor.setFill()
+        layout?.barColor.setFill()
         barPath.fill()
     }
     
     private func drawRound(point: CGPoint) {
-        guard let cellLayout = cellLayout, let roundSize = roundSize, !cellLayout.onlyPathLine else { return }
+        guard let layout = layout, let roundSize = roundSize, !layout.onlyPathLine else { return }
         
         let origin = CGPoint(x: point.x - roundSize / 2, y: point.y - roundSize / 2)
         let size = CGSize(width: roundSize, height: roundSize)
         let round = UIBezierPath(ovalIn: CGRect(origin: origin, size: size))
-        cellLayout.roundColor.setFill()
+        layout.roundColor.setFill()
         round.fill()
     }
     
@@ -243,13 +243,13 @@ class GraghViewCell: UIView {
         jaggyPath.addLine(to: point)
         jaggyPath.addLine(to: otherPoint2)
         jaggyPath.close()
-        cellLayout?.jaggyColor.setFill()
+        layout?.jaggyColor.setFill()
         jaggyPath.fill()
         
     }
     
     private func drawOverLabel() {
-        guard let cellLayout = cellLayout, let labelHeight = labelHeight else { return }
+        guard let layout = layout, let labelHeight = labelHeight else { return }
         
         let overLabel: UILabel = UILabel()
         overLabel.frame = CGRect(x: 0, y: 0, width: frame.width, height: labelHeight)
@@ -257,8 +257,8 @@ class GraghViewCell: UIView {
         overLabel.text = overTextFormatter(from: graghValue)
         overLabel.textAlignment = .center
         overLabel.font = overLabel.font.withSize(10)
-        overLabel.backgroundColor = cellLayout.labelBackgroundColor
-        overLabel.isHidden = cellLayout.valueLabelIsHidden
+        overLabel.backgroundColor = layout.labelBackgroundColor
+        overLabel.isHidden = layout.valueLabelIsHidden
         addSubview(overLabel)
     }
     
@@ -278,7 +278,7 @@ class GraghViewCell: UIView {
         
         underLabel.textAlignment = .center
         underLabel.font = underLabel.font.withSize(10)
-        underLabel.backgroundColor = cellLayout?.labelBackgroundColor
+        underLabel.backgroundColor = layout?.labelBackgroundColor
         addSubview(underLabel)
     }
     
