@@ -1,5 +1,5 @@
 //
-//  GraghViewCell.swift
+//  GraghViewComponent.swift
 //  GraghView
 //
 //  Created by 酒井恭平 on 2016/11/27.
