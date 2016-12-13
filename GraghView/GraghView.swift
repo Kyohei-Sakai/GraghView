@@ -215,9 +215,7 @@ class GraghView: UIScrollView {
     // MARK: Round Path
     
     func drawPathToRound() {
-        if style != .round { return }
-        
-        guard let firstComponent = components.first, let startPoint = firstComponent.endPoint else { return }
+        guard style == .round, let firstComponent = components.first, let startPoint = firstComponent.endPoint else { return }
         
         // GraghViewと同じ大きさのViewを用意
         roundPathView.frame = CGRect(origin: .zero, size: contentSize)
