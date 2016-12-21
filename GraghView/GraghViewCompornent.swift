@@ -23,6 +23,11 @@ class GraghViewComponent: UIView {
         return y - comparisonValueHeight
     }
     
+    // MARK: Closure
+    
+    var callback: (() -> CGFloat)?
+    
+    
     // MARK: - Private properties
     
     // MARK: Shared
@@ -35,7 +40,8 @@ class GraghViewComponent: UIView {
     private let layout: GraghView.ComponentLayoutOptions?
     
     private var graghValue: CGFloat
-    private var maxGraghValue: CGFloat? { return graghView?.maxGraghValue }
+//    private var maxGraghValue: CGFloat? { return graghView?.maxGraghValue }
+    private var maxGraghValue: CGFloat? { return callback?() }
     
     private var labelText: String?
     private var date: Date?

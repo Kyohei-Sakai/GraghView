@@ -52,6 +52,22 @@ class GraghView: UIScrollView {
     private var averageValueY: CGFloat?
     
     
+    // MARK: Closure
+    
+    private func registerClosure() {
+        guard let maxGraghValue = maxGraghValue else { return }
+        
+        components.forEach { component in
+            
+            component.callback = { () -> CGFloat in
+                return maxGraghValue
+            }
+            
+        }
+        
+    }
+    
+    
     // MARK: - Public properties
     
     var components: [GraghViewComponent] = []
@@ -314,6 +330,8 @@ class GraghView: UIScrollView {
             self.comparisonValueY = component.comparisonValueY
             self.averageValueY = component.getEndPointForStartPoint(value: averageValue)
         }
+        
+        registerClosure()
     }
     
     private func drawComponentsOfDateLabel() {
@@ -334,6 +352,8 @@ class GraghView: UIScrollView {
                 self.comparisonValueY = component.comparisonValueY
                 self.averageValueY = component.getEndPointForStartPoint(value: averageValue)
             }
+            
+            registerClosure()
         }
     }
     
