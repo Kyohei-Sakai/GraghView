@@ -124,26 +124,24 @@ class GraghViewComponent: UIView {
     // MARK: - Initializers
     
     // date label
-    init(frame: CGRect, graghValue: CGFloat, date: Date, target graghView: GraghView? = nil) {
+    init(frame: CGRect, graghValue: CGFloat, date: Date) {
         
         self.graghValue = graghValue
         self.date = date
         
         super.init(frame: frame)
-        graghView?.registerNotification(component: self)
-        self.backgroundColor = layout?.GraghBackgroundColor
+        self.backgroundColor = callLayout?().GraghBackgroundColor
         appendComponent?(self)
     }
     
     // string label (default init)
-    init(frame: CGRect, graghValue: CGFloat, labelText: String, target graghView: GraghView? = nil) {
+    init(frame: CGRect, graghValue: CGFloat, labelText: String) {
         
         self.graghValue = graghValue
         self.labelText = labelText
         
         super.init(frame: frame)
-        graghView?.registerNotification(component: self)
-        self.backgroundColor = layout?.GraghBackgroundColor
+        self.backgroundColor = callLayout?().GraghBackgroundColor
         appendComponent?(self)
     }
     

@@ -89,6 +89,8 @@ class GraghView: UIScrollView {
             self.comparisonValue
         }
         
+        component.layer.backgroundColor = componentLayout.GraghBackgroundColor.cgColor
+        
     }
     
     
@@ -347,8 +349,9 @@ class GraghView: UIScrollView {
             // barの表示をずらしていく
             let rect = CGRect(origin: CGPoint(x: CGFloat(index) * componentLayout.componentAreaWidth, y: 0), size: CGSize(width: componentLayout.componentAreaWidth, height: frame.height))
             
-            let component = GraghViewComponent(frame: rect, graghValue: graghValues[index], labelText: xAxisLabels[index], target: self)
+            let component = GraghViewComponent(frame: rect, graghValue: graghValues[index], labelText: xAxisLabels[index])
             
+            registerNotification(component: component)
             addSubview(component)
             
             self.comparisonValueY = component.comparisonValueY
@@ -368,8 +371,9 @@ class GraghView: UIScrollView {
                 // barの表示をずらしていく
                 let rect = CGRect(origin: CGPoint(x: CGFloat(index) * componentLayout.componentAreaWidth, y: 0), size: CGSize(width: componentLayout.componentAreaWidth, height: frame.height))
                 
-                let component = GraghViewComponent(frame: rect, graghValue: graghValues[index], date: date, target: self)
+                let component = GraghViewComponent(frame: rect, graghValue: graghValues[index], date: date)
                 
+                registerNotification(component: component)
                 addSubview(component)
                 
                 self.comparisonValueY = component.comparisonValueY
