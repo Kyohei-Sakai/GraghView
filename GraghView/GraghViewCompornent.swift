@@ -130,8 +130,7 @@ class GraghViewComponent: UIView {
         self.date = date
         
         super.init(frame: frame)
-        self.backgroundColor = callLayout?().GraghBackgroundColor
-        appendComponent?(self)
+        self.backgroundColor = .white
     }
     
     // string label (default init)
@@ -141,8 +140,7 @@ class GraghViewComponent: UIView {
         self.labelText = labelText
         
         super.init(frame: frame)
-        self.backgroundColor = callLayout?().GraghBackgroundColor
-        appendComponent?(self)
+        self.backgroundColor = .white
     }
     
     // storyboardで生成する時

@@ -352,6 +352,7 @@ class GraghView: UIScrollView {
             let component = GraghViewComponent(frame: rect, graghValue: graghValues[index], labelText: xAxisLabels[index])
             
             registerNotification(component: component)
+            components.append(component)
             addSubview(component)
             
             self.comparisonValueY = component.comparisonValueY
@@ -374,6 +375,7 @@ class GraghView: UIScrollView {
                 let component = GraghViewComponent(frame: rect, graghValue: graghValues[index], date: date)
                 
                 registerNotification(component: component)
+                components.append(component)
                 addSubview(component)
                 
                 self.comparisonValueY = component.comparisonValueY
