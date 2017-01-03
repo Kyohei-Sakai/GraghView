@@ -52,6 +52,48 @@ class GraghView: UIScrollView {
     private var averageValueY: CGFloat?
     
     
+    // MARK: Closure
+    
+    func registerNotification(component: GraghViewComponent) {
+        
+        component.callMaxGraghValue = { () -> CGFloat? in
+            guard let maxGraghValue = self.maxGraghValue else { return nil }
+            return maxGraghValue
+        }
+        
+        component.callStyle = { () -> GraghStyle in
+            return self.style
+        }
+        
+        component.callDateStyle = { () -> GraghViewDateStyle in
+            return self.dateStyle
+        }
+        
+        component.callDataType = { () -> GraghViewDataType in
+            return self.dataType
+        }
+        
+        component.callLayout = { () -> GraghView.ComponentLayoutOptions in
+            return self.componentLayout
+        }
+        
+        component.appendComponent = { component -> () in
+            self.components.append(component)
+        }
+        
+        component.callDataLabelType = { () -> GraghViewDataLabelType in
+            self.dataLabelType
+        }
+        
+        component.callComparisonValue = { () -> CGFloat in
+            self.comparisonValue
+        }
+        
+        component.layer.backgroundColor = componentLayout.GraghBackgroundColor.cgColor
+        
+    }
+    
+    
     // MARK: - Public properties
     
     var components: [GraghViewComponent] = []
@@ -307,13 +349,16 @@ class GraghView: UIScrollView {
             // barの表示をずらしていく
             let rect = CGRect(origin: CGPoint(x: CGFloat(index) * componentLayout.componentAreaWidth, y: 0), size: CGSize(width: componentLayout.componentAreaWidth, height: frame.height))
             
-            let component = GraghViewComponent(frame: rect, graghValue: graghValues[index], labelText: xAxisLabels[index], comparisonValue: comparisonValue, target: self)
+            let component = GraghViewComponent(frame: rect, graghValue: graghValues[index], labelText: xAxisLabels[index])
             
+            registerNotification(component: component)
+            components.append(component)
             addSubview(component)
             
             self.comparisonValueY = component.comparisonValueY
             self.averageValueY = component.getEndPointForStartPoint(value: averageValue)
         }
+        
     }
     
     private func drawComponentsOfDateLabel() {
@@ -327,13 +372,16 @@ class GraghView: UIScrollView {
                 // barの表示をずらしていく
                 let rect = CGRect(origin: CGPoint(x: CGFloat(index) * componentLayout.componentAreaWidth, y: 0), size: CGSize(width: componentLayout.componentAreaWidth, height: frame.height))
                 
-                let component = GraghViewComponent(frame: rect, graghValue: graghValues[index], date: date, comparisonValue: comparisonValue, target: self)
+                let component = GraghViewComponent(frame: rect, graghValue: graghValues[index], date: date)
                 
+                registerNotification(component: component)
+                components.append(component)
                 addSubview(component)
                 
                 self.comparisonValueY = component.comparisonValueY
                 self.averageValueY = component.getEndPointForStartPoint(value: averageValue)
             }
+            
         }
     }
     

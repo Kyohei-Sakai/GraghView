@@ -23,23 +23,39 @@ class GraghViewComponent: UIView {
         return y - comparisonValueHeight
     }
     
+    // MARK: Closure
+    
+    var callMaxGraghValue: (() -> CGFloat?)?
+    var callStyle: (() -> GraghStyle)?
+    var callDateStyle: (() -> GraghViewDateStyle)?
+    var callDataType: (() -> GraghViewDataType)?
+    var callLayout: (() -> GraghView.ComponentLayoutOptions)?
+    
+    var appendComponent: ((GraghViewComponent) -> ())?
+    
+    var callDataLabelType: (() -> GraghViewDataLabelType)?
+    var callComparisonValue: (() -> CGFloat)?
+    
+    
     // MARK: - Private properties
     
     // MARK: Shared
     
-    private var graghView: GraghView?
-    private var style: GraghStyle?
-    private var dateStyle: GraghViewDateStyle?
-    private var dataType: GraghViewDataType?
+//    private var graghView: GraghView?
+    private var style: GraghStyle? { return callStyle?() }
+    private var dateStyle: GraghViewDateStyle? { return callDateStyle?() }
+    private var dataType: GraghViewDataType? { return callDataType?() }
     
-    private let layout: GraghView.ComponentLayoutOptions?
+    private var layout: GraghView.ComponentLayoutOptions? { return callLayout?() }
     
     private var graghValue: CGFloat
-    private var maxGraghValue: CGFloat? { return graghView?.maxGraghValue }
+    private var maxGraghValue: CGFloat? { return callMaxGraghValue?() }
     
     private var labelText: String?
     private var date: Date?
-    private var comparisonValue: CGFloat?
+    private var comparisonValue: CGFloat? { return callComparisonValue?() }
+    
+    private var dataLabelType: GraghViewDataLabelType? { return callDataLabelType?() }
     
     private var maxBarAreaHeight: CGFloat? {
         guard let maxGraghValue = maxGraghValue, let layout = layout else { return nil }
@@ -108,43 +124,28 @@ class GraghViewComponent: UIView {
     // MARK: - Initializers
     
     // date label
-    init(frame: CGRect, graghValue: CGFloat, date: Date, comparisonValue: CGFloat, target graghView: GraghView? = nil) {
-        self.graghView = graghView
-        self.style = graghView?.style
-        self.dateStyle = graghView?.dateStyle
-        self.dataType = graghView?.dataType
-        self.layout = graghView?.componentLayout
+    init(frame: CGRect, graghValue: CGFloat, date: Date) {
         
         self.graghValue = graghValue
         self.date = date
-        self.comparisonValue = comparisonValue
         
         super.init(frame: frame)
-        self.backgroundColor = layout?.GraghBackgroundColor
-        self.graghView?.components.append(self)
+        self.backgroundColor = .white
     }
     
     // string label (default init)
-    init(frame: CGRect, graghValue: CGFloat, labelText: String, comparisonValue: CGFloat, target graghView: GraghView? = nil) {
-        self.graghView = graghView
-        self.style = graghView?.style
-        self.dateStyle = graghView?.dateStyle
-        self.dataType = graghView?.dataType
-        self.layout = graghView?.componentLayout
+    init(frame: CGRect, graghValue: CGFloat, labelText: String) {
         
         self.graghValue = graghValue
         self.labelText = labelText
-        self.comparisonValue = comparisonValue
         
         super.init(frame: frame)
-        self.backgroundColor = layout?.GraghBackgroundColor
-        self.graghView?.components.append(self)
+        self.backgroundColor = .white
     }
     
     // storyboardで生成する時
     required init?(coder aDecoder: NSCoder) {
         self.graghValue = 0
-        self.layout = nil
         super.init(coder: aDecoder)
 //        fatalError("init(coder:) has not been implemented")
     }
@@ -263,13 +264,13 @@ class GraghViewComponent: UIView {
     }
     
     private func drawUnderLabel() {
-        guard let labelHeight = labelHeight, let graghView = graghView else { return }
+        guard let labelHeight = labelHeight, let dataLabelType = dataLabelType else { return }
         
         let underLabel: UILabel = UILabel()
         underLabel.frame = CGRect(x: 0, y: 0, width: frame.width, height: labelHeight)
         underLabel.center = CGPoint(x: x, y: frame.height - labelHeight / 2)
         
-        switch graghView.dataLabelType {
+        switch dataLabelType {
         case .default:
             underLabel.text = labelText
         case .date:
